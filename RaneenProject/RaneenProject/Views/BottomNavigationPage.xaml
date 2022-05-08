@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="RaneenProject.Views.BottomNavigationPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:local="clr-namespace:RaneenProject.Views" 
+    android:TabbedPage.BarItemColor="{DynamicResource Steel}"
+    android:TabbedPage.BarSelectedItemColor="{DynamicResource PrimaryColor}"
+    android:TabbedPage.ToolbarPlacement="Bottom"
+    BackgroundColor="{DynamicResource Gray-Bg}"
+    BarBackgroundColor="{DynamicResource Gray-Bg}"
+    NavigationPage.HasNavigationBar="False">
+    
+    <local:HomePage Title="Home">
+        <local:HomePage.IconImageSource>
+            <FontImageSource
+                FontFamily="FontIcons"
+                Glyph="{StaticResource Home}"
+                Size="16" />
+        </local:HomePage.IconImageSource>
+    </local:HomePage>
+
+    <local:CatalogTilePage Title="Catalog">
+        <local:CatalogTilePage.IconImageSource>
+            <FontImageSource
+                FontFamily="FontIcons"
+                Glyph="{StaticResource Category}"
+                Size="16" />
+        </local:CatalogTilePage.IconImageSource>
+    </local:CatalogTilePage>
+
+    <local:HomePage Title="Photos">
+        <local:HomePage.IconImageSource>
+            <FontImageSource
+                FontFamily="FontIcons"
+                Glyph="{StaticResource Home}"
+                Size="16" />
+        </local:HomePage.IconImageSource>
+    </local:HomePage>
+
+    <local:CartPage Title="Cart">
+        <local:CartPage.IconImageSource>
+            <FontImageSource
+                FontFamily="FontIcons"
+                Glyph="{StaticResource Cart}"
+                Size="16" />
+        </local:CartPage.IconImageSource>
+    </local:CartPage>
+
+    <local:HomePage Title="Photos">
+        <local:HomePage.IconImageSource>
+            <FontImageSource
+                FontFamily="FontIcons"
+                Glyph="{StaticResource Account}"
+                Size="16" />
+        </local:HomePage.IconImageSource>
+    </local:HomePage>
+</TabbedPage>
