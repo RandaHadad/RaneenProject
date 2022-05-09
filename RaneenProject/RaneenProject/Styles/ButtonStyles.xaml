@@ -60,12 +60,12 @@
 
     <!--  Common style for Simple buttons  -->
     <Style x:Key="SimpleButtonStyle" TargetType="buttons:SfButton">
-        <Setter Property="BackgroundColor" Value="{DynamicResource Gray-White}" />
+        <Setter Property="BackgroundColor" Value="Red" />
         <Setter Property="WidthRequest" Value="155" />
-        <Setter Property="CornerRadius" Value="1" />
+        <Setter Property="CornerRadius" Value="5" />
         <Setter Property="BorderWidth" Value="0" />
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="TextColor" Value="White" />
         <Setter Property="FontFamily" Value="Montserrat-SemiBold" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
