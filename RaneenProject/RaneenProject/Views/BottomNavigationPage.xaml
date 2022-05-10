@@ -22,23 +22,23 @@
         </local:HomePage.IconImageSource>
     </local:HomePage>
 
-    <local:CatalogTilePage Title="Catalog">
-        <local:CatalogTilePage.IconImageSource>
+    <local:CategoryTilePage Title="Catalog">
+        <local:CategoryTilePage.IconImageSource>
             <FontImageSource
                 FontFamily="FontIcons"
                 Glyph="{StaticResource Category}"
                 Size="16" />
-        </local:CatalogTilePage.IconImageSource>
-    </local:CatalogTilePage>
+        </local:CategoryTilePage.IconImageSource>
+    </local:CategoryTilePage>
 
-    <local:HomePage Title="Photos">
-        <local:HomePage.IconImageSource>
+    <local:CatalogTilePage Title="Deals">
+        <local:CatalogTilePage.IconImageSource>
             <FontImageSource
                 FontFamily="FontIcons"
-                Glyph="{StaticResource Home}"
+                Glyph="{StaticResource FlashSale}"
                 Size="16" />
-        </local:HomePage.IconImageSource>
-    </local:HomePage>
+        </local:CatalogTilePage.IconImageSource>
+    </local:CatalogTilePage>
 
     <local:CartPage Title="Cart">
         <local:CartPage.IconImageSource>

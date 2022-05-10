@@ -1,5 +1,6 @@
 using RaneenProject.DataService;
 using Syncfusion.ListView.XForms;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
@@ -39,6 +40,13 @@ namespace RaneenProject.Views
                     (this.CategoryTile.LayoutManager as GridLayout).SpanCount = 3;
                 }
             }
+        }
+
+        private void OnImageNameTapped(object sender, System.EventArgs e)
+        {
+            string temp = (sender as Image).Source.ToString();
+            var targetpage = new CatalogTilePage();
+            Navigation.PushAsync(targetpage);
         }
     }
 }
