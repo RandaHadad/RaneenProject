@@ -6,7 +6,7 @@
     xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms">
 
     <Style x:Key="TransparentSelectionListView" TargetType="listView:SfListView">
-        <Setter Property="BackgroundColor" Value="{DynamicResource Gray-Bg}" />
+        <Setter Property="BackgroundColor" Value="#F0F3F8" />
         <Setter Property="FocusBorderThickness" Value="0" />
         <Setter Property="SelectionBackgroundColor" Value="Transparent" />
         <Setter Property="IsScrollBarVisible" Value="False" />

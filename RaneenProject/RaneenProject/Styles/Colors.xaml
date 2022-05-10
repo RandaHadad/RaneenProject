@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Color x:Key="EntryPlaceholderColor">#A0FFFFFF</Color>
+    <Color x:Key="White">#ffffff</Color>
     <Color x:Key="GradientStartColor">#012E8B</Color>
     <Color x:Key="GradientEndColor">#3F0041</Color>
     <Color x:Key="GradientStart">#713d74</Color>
