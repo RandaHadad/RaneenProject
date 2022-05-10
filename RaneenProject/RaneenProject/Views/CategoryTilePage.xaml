@@ -74,6 +74,11 @@
                                             CachingEnabled="true"
                                             Uri="{Binding Icon}" />
                                     </Image.Source>
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer
+                               Tapped="OnImageNameTapped"
+                                NumberOfTapsRequired="1" />
+                                    </Image.GestureRecognizers>
                                 </Image>
 
                                 <!--  Category Name  -->

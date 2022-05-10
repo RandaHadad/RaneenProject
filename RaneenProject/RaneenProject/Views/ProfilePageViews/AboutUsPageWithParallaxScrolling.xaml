@@ -13,6 +13,7 @@
     BackgroundColor="{DynamicResource Gray-Bg}"
     NavigationPage.HasNavigationBar="False">
 
+    <!--TODO: Upload our team Images-->
     <ContentPage.ControlTemplate>
         <ControlTemplate>
             <StackLayout Spacing="0">
@@ -34,10 +35,8 @@
     </ContentPage.ControlTemplate>
 
     <ContentPage.Content>
-
         <ScrollView>
             <Grid RowDefinitions="Auto, *" RowSpacing="0">
-
                 <!--  Background image  -->
                 <Image
                     Grid.Row="0"
@@ -68,7 +67,7 @@
                     <Label
                         Margin="16,0,16,0"
                         HorizontalOptions="Start"
-                        HorizontalTextAlignment="Start"
+                        HorizontalTextAlignment="Center"
                         Style="{StaticResource DescriptionLabelStyle}"
                         Text="{Binding ProductDescription}"
                         TextColor="#606a7b" />
@@ -81,7 +80,7 @@
                     BackgroundColor="{DynamicResource Gray-200}"
                     HorizontalOptions="Fill"
                     Source="OurTeam.png"
-                    VerticalOptions="Fill" />
+                    VerticalOptions="Fill"/>
 
                 <!--  To display the team member's details  -->
                 <listView:SfListView
@@ -91,13 +90,14 @@
                     ItemsSource="{Binding EmployeeDetails}"
                     SelectionMode="None"
                     TapCommand="{Binding ItemSelectedCommand}"
-                    VerticalOptions="Start">
+                    VerticalOptions="Start"
+                    Margin="0,30,0,0">
 
                     <listView:SfListView.HeaderTemplate>
                         <DataTemplate>
                             <!--  Header  -->
                             <Label
-                                Margin="0,60,0,5"
+                                Margin="0,60,0,10"
                                 FontSize="20"
                                 LineHeight="{OnPlatform Android=1.25,
                                                         Default=-1}"
@@ -123,13 +123,15 @@
                                     <Image
                                         BackgroundColor="{DynamicResource Gray-200}"
                                         HeightRequest="64"
-                                        WidthRequest="64">
-                                        <Image.Source>
+                                        WidthRequest="64"
+                                        Source="{Binding Image}"
+                                        >
+                                        <!--<Image.Source>
                                             <UriImageSource
                                                 CacheValidity="14"
                                                 CachingEnabled="true"
                                                 Uri="{Binding Image}" />
-                                        </Image.Source>
+                                        </Image.Source>-->
                                     </Image>
                                 </border:SfBorder>
 
@@ -155,7 +157,7 @@
                     </listView:SfListView.ItemTemplate>
 
                     <listView:SfListView.LayoutManager>
-                        <listView:GridLayout SpanCount="3" />
+                        <listView:GridLayout SpanCount="2" />
                     </listView:SfListView.LayoutManager>
 
                     <!--  Behavior added to handle scrolling of ListView  -->

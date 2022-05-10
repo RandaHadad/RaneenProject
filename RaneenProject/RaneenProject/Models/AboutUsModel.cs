@@ -79,7 +79,8 @@ namespace RaneenProject.Models.About
         {
             get
             {
-                return App.ImageServerPath + this.image;
+                return this.image;
+                //return App.ImageServerPath + this.image;
             }
 
             set
