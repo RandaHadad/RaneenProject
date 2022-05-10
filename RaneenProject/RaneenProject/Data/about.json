@@ -7,22 +7,22 @@
   "employeeDetails": [
     {
       "employeeName": "Maryam Gamal",
-      "image": "ProfileImage15.png",
+      "image": "avatar2.png",
       "designation": "Team Leader"
     },
     {
       "employeeName": "Randa Omar",
-      "image": "ProfileImage10.png",
+      "image": "avatar2.png",
       "designation": "Team Member"
     },
     {
       "employeeName": "Khaled Waleed",
-      "image": "ProfileImage11.png",
+      "image": "avatar2.png",
       "designation": "Team Member"
     },
     {
-      "employeeName": "Mustafa Refat",
-      "image": "ProfileImage12.png",
+      "employeeName": "Mostafa Refaat",
+      "image": "avatar2.png",
       "designation": "Team Member"
     }
   ]

@@ -123,13 +123,15 @@
                                     <Image
                                         BackgroundColor="{DynamicResource Gray-200}"
                                         HeightRequest="64"
-                                        WidthRequest="64">
-                                        <Image.Source>
+                                        WidthRequest="64"
+                                        Source="{Binding Image}"
+                                        >
+                                        <!--<Image.Source>
                                             <UriImageSource
                                                 CacheValidity="14"
                                                 CachingEnabled="true"
                                                 Uri="{Binding Image}" />
-                                        </Image.Source>
+                                        </Image.Source>-->
                                     </Image>
                                 </border:SfBorder>
 
