@@ -33,7 +33,7 @@
         </local:CategoryTilePage.IconImageSource>
     </local:CategoryTilePage>
 
-    <local:HomePage Title="Photos">
+    <local:HomePage Title="Deals">
         <local:HomePage.IconImageSource>
             <FontImageSource
                 FontFamily="FontIcons"
@@ -51,7 +51,7 @@
         </local:CartPage.IconImageSource>
     </local:CartPage>
 
-    <local:HomePage Title="Photos">
+    <local:HomePage Title="Profile">
         <local:HomePage.IconImageSource>
             <FontImageSource
                 FontFamily="FontIcons"
