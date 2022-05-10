@@ -1,54 +1,29 @@
 {
-  "productDescription": "Situated in the heart of Smith-town, Acme Products, Inc., has a long-standing tradition of selling the best products while providing the fastest service on the market. Since 1952, we have helped our customers identify their needs, understand their wants, and capture their dreams.",
+  "productDescription": "A Xamarin Project for ITI 9-month scholarship, A mandatory requirement for passing the Xamarin framework course with Eng.Nasr. Was done using Syncfusion Xamarin Essential UI Kit and SQLite.",
   "productIcon": "Icon.png",
   "productVersion": "1.0",
   "bannerImage": "Mask.png",
 
   "employeeDetails": [
     {
-      "employeeName": "Alice",
+      "employeeName": "Maryam Gamal",
       "image": "ProfileImage15.png",
-      "designation": "Project Manager"
+      "designation": "Team Leader"
     },
     {
-      "employeeName": "Jessica Park",
+      "employeeName": "Randa Omar",
       "image": "ProfileImage10.png",
-      "designation": "Senior Manager"
+      "designation": "Team Member"
     },
     {
-      "employeeName": "Lisa",
+      "employeeName": "Khaled Waleed",
       "image": "ProfileImage11.png",
-      "designation": "Senior Developer"
+      "designation": "Team Member"
     },
     {
-      "employeeName": "Rebecca",
+      "employeeName": "Mustafa Refat",
       "image": "ProfileImage12.png",
-      "designation": "Senior Designer"
-    },
-    {
-      "employeeName": "Alexander",
-      "image": "ProfileImage3.png",
-      "designation": "Senior Manager"
-    },
-    {
-      "employeeName": "Anthony",
-      "image": "ProfileImage1.png",
-      "designation": "Senior Developer"
-    },
-    {
-      "employeeName": "Danielle",
-      "image": "ProfileImage7.png",
-      "designation": "Senior Developer"
-    },
-    {
-      "employeeName": "Kyle Greene",
-      "image": "ProfileImage6.png",
-      "designation": "Senior Developer"
-    },
-    {
-      "employeeName": "Navya Sharma",
-      "image": "ProfileImage13.png",
-      "designation": "Senior Developer"
+      "designation": "Team Member"
     }
   ]
 }

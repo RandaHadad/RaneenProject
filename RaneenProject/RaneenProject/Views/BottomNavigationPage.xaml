@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
     xmlns:local="clr-namespace:RaneenProject.Views" 
+    xmlns:localProfileTab="clr-namespace:RaneenProject.Views.UserAccountViews"
     android:TabbedPage.BarItemColor="{DynamicResource Steel}"
     android:TabbedPage.BarSelectedItemColor="{DynamicResource PrimaryColor}"
     android:TabbedPage.ToolbarPlacement="Bottom"
@@ -48,12 +49,13 @@
         </local:CartPage.IconImageSource>
     </local:CartPage>
 
-    <local:HomePage Title="Photos">
-        <local:HomePage.IconImageSource>
+    <localProfileTab:LandingPage Title="Profile">
+        <localProfileTab:LandingPage.IconImageSource>
             <FontImageSource
                 FontFamily="FontIcons"
                 Glyph="{StaticResource Account}"
                 Size="16" />
-        </local:HomePage.IconImageSource>
-    </local:HomePage>
+        </localProfileTab:LandingPage.IconImageSource>
+    </localProfileTab:LandingPage>
+    
 </TabbedPage>

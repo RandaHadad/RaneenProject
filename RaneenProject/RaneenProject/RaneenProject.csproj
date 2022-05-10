@@ -116,7 +116,7 @@
     <EmbeddedResource Update="Themes\LightTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AboutUsPageWithParallaxScrolling.xaml">
+    <EmbeddedResource Update="Views\ProfilePageViews\AboutUsPageWithParallaxScrolling.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\AlbumPage.xaml">
@@ -152,6 +152,18 @@
     <EmbeddedResource Update="Views\PriceDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\ProfilePageViews\AccountInformationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ProfilePageViews\EditEmail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ProfilePageViews\EditInfo.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\ProfilePageViews\ProfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -169,6 +181,15 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Templates\WishlistItemTemplate.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\UserAccountViews\LandingPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\UserAccountViews\LoginPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\UserAccountViews\SignupPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\WishlistPage.xaml">
       <Generator>MSBuild:Compile</Generator>

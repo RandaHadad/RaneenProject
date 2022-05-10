@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RaneenProject.Views.ProfilePageViews.EditInfo"
+             Title="Edit Account Info">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#F0F3F8">
+            <Label Text="First Name"
+                   TextColor="Black"
+                   Padding="30, 50, 0, 0"/>
+            <Frame CornerRadius="5"
+                   Padding="0"
+                   Margin="30, 0, 30, 0">
+                <Entry BackgroundColor="white"
+                   TextColor="Black"
+                   FontSize="14"/>
+            </Frame>
+            <Label Text="Last Name"
+                   TextColor="Black"
+                   Padding="30, 30, 0, 0"/>
+            <Frame CornerRadius="5"
+                   Padding="0"
+                   Margin="30, 0, 30, 0">
+                <Entry BackgroundColor="white"
+                   TextColor="Black"
+                   FontSize="14"/>
+            </Frame>
+            <Label Text="Confirm Password"
+                   TextColor="Black"
+                   Padding="30, 30, 0, 0"/>
+            <!--TODO: Show/hide password-->
+            <Frame CornerRadius="5"
+                   Padding="0"
+                   Margin="30, 0, 30, 0">
+                <Entry BackgroundColor="white"
+                   TextColor="Black"
+                   FontSize="14"
+                       IsPassword="True"/>
+            </Frame>
+            <Button Text="Edit Information"
+                    BackgroundColor="red" 
+                    CornerRadius="5"
+                    Margin="30, 30, 30, 20" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
