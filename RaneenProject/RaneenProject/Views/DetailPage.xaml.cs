@@ -1,3 +1,4 @@
+using RaneenProject.Models;
 using RaneenProject.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -12,13 +13,14 @@ namespace RaneenProject.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DetailPage
     {
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DetailPage" /> class.
         /// </summary>
-        public DetailPage()
+        public DetailPage(Product product)
         {
             this.InitializeComponent();
-            this.BindingContext = DetailPageViewModel.BindingContext;
+            this.BindingContext = new DetailPageViewModel(product);
         }
 
         /// <summary>

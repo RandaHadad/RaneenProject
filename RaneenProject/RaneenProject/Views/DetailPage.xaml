@@ -29,7 +29,7 @@
 
             <DataTemplate x:Key="PortraitTemplate">
                 <Image
-                    Margin="3"
+                    Margin="5"
                     Aspect="{OnIdiom Default=AspectFit,
                                      Tablet=AspectFit}"
                     BackgroundColor="{DynamicResource Gray-Bg}"
@@ -46,7 +46,7 @@
 
             <DataTemplate x:Key="LandscapeTemplate">
                 <Image
-                    Margin="3"
+                    Margin="5"
                     Aspect="AspectFill"
                     BackgroundColor="{DynamicResource Gray-200}"
                     HeightRequest="350"
@@ -85,8 +85,9 @@
         <ControlTemplate>
             <StackLayout Spacing="0">
 
-                <!--  Title View  -->
-                <controls:TitleView Title="Cart">
+                <!--  App Bar  -->
+                <controls:TitleView Title="{Binding Path=BindingContextProduct.Name, Source={x:Reference detailPage}}">
+                    
                     <controls:TitleView.LeadingView>
                         <buttons:SfButton
                             x:Name="backButton"
@@ -96,7 +97,7 @@
                             Text="{StaticResource Back}" />
                     </controls:TitleView.LeadingView>
 
-                    <controls:TitleView.TrailingView>
+                    <!-- <controls:TitleView.TrailingView>
                         <badge:SfBadgeView
                             Margin="{Binding Path=BindingContext.CartItemCount, Source={x:Reference detailPage}, Converter={x:StaticResource intToThicknessConverter}}"
                             Padding="0"
@@ -105,13 +106,13 @@
                             HorizontalOptions="End"
                             VerticalOptions="Center"
                             WidthRequest="40">
-                            <badge:SfBadgeView.Content>
+                             <badge:SfBadgeView.Content>
                                 <buttons:SfButton
                                     Command="{TemplateBinding BindingContext.CardItemCommand}"
                                     HorizontalOptions="End"
                                     Style="{StaticResource IconButtonStyle}"
                                     Text="{StaticResource Cart}" />
-                            </badge:SfBadgeView.Content>
+                            </badge:SfBadgeView.Content> 
                             <badge:SfBadgeView.BadgeSettings>
                                 <badge:BadgeSetting
                                     BackgroundColor="{DynamicResource PrimaryColor}"
@@ -123,7 +124,7 @@
                                     Offset="-10,10" />
                             </badge:SfBadgeView.BadgeSettings>
                         </badge:SfBadgeView>
-                    </controls:TitleView.TrailingView>
+                    </controls:TitleView.TrailingView> -->
                 </controls:TitleView>
 
                 <ContentPresenter />
@@ -162,15 +163,12 @@
                     BackgroundColor="{OnIdiom Default={DynamicResource Gray-Bg},
                                               Tablet={DynamicResource Gray-100},
                                               Converter={StaticResource DynamicResourceToColorConverter}}"
-                    DotPlacement="OutSide"
-                    DotsBorderColor="Transparent"
+                    
                     EnableLooping="False"
                     HorizontalOptions="Center"
                     ItemTemplate="{StaticResource PortraitTemplate}"
-                    ItemsSource="{Binding PreviewImages}"
-                    NavigationStripMode="Dots"
-                    SelectedDotColor="{DynamicResource PrimaryColor}"
-                    UnselectedDotColor="{DynamicResource Gray-200}"
+                    ItemsSource="{Binding Product.PreviewImages}"
+                    NavigationStripMode="Thumbnail"
                     VerticalOptions="Start" />
 
                 <ContentView
@@ -205,45 +203,39 @@
                             LineBreakMode="TailTruncation"
                             MaxLines="1"
                             Style="{StaticResource TitleLabelStyle}"
-                            Text="{Binding Name}" />
+                            Text="{Binding Product.Name}"/>
 
-                        <!--  Product Summary  -->
-                        <Label
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Grid.ColumnSpan="2"
-                            helper:RTLHelper.Margin="{OnIdiom Default='0,0,3,2',
-                                                              Tablet='0,8,3,8'}"
-                            HorizontalOptions="Start"
-                            HorizontalTextAlignment="Start"
-                            LineBreakMode="TailTruncation"
-                            MaxLines="2"
-                            Style="{StaticResource DescriptionLabelStyle}"
-                            Text="{Binding Summary}" />
 
-                        <!--  Product rating  -->
-                        <rating:SfRating
+
+                        <StackLayout
                             Grid.Row="2"
                             Grid.Column="1"
+                            Orientation="Horizontal">
+                
+                            <!--  Product rating  -->
+                            <rating:SfRating   
+                   
                             helper:RTLHelper.Margin="0,6,6,11"
                             HorizontalOptions="Start"
                             ItemSize="14"
                             RatingSettings="{StaticResource RatingSettings}"
                             Style="{StaticResource RatingStyle}"
-                            Value="{Binding OverallRating}" />
+                            Value="{Binding Product.OverallRating}" />
 
-                        <Label
+                            <Label
                             Grid.Row="2"
-                            Grid.Column="2"
+                            Grid.Column="4"
+                            Grid.ColumnSpan="4"
                             Margin="0,6,0,11"
                             FontSize="{OnIdiom Default=12,
                                                Desktop=14}"
-                            HorizontalOptions="Start"
+                            HorizontalOptions="EndAndExpand"
                             HorizontalTextAlignment="Start"
                             Style="{StaticResource DescriptionLabelStyle}"
-                            Text="{Binding OverallRating, StringFormat='{}{0} Ratings'}"
+                            Text="Add Review"
                             VerticalOptions="Center"
                             VerticalTextAlignment="Center" />
+                        </StackLayout>
 
                         <StackLayout
                             Grid.Row="3"
@@ -252,7 +244,7 @@
                             Margin="{OnIdiom Phone='0,0,0,10',
                                              Tablet='0,13,0,10',
                                              Desktop=0}"
-                            Orientation="Horizontal"
+                            Orientation="Vertical"
                             Spacing="2">
 
                             <!--  Product Price  -->
@@ -262,51 +254,24 @@
                                 HorizontalOptions="Start"
                                 HorizontalTextAlignment="Start"
                                 Style="{StaticResource TitleLabelStyle}"
-                                Text="{Binding DiscountPrice, StringFormat='${0:0 }'}"
-                                TextColor="{DynamicResource PrimaryColor}"
+                                Text="{Binding Product.DiscountPrice, StringFormat='EGP {0:0.00}'}"
+                                TextColor="Red"
                                 VerticalOptions="Center"
                                 VerticalTextAlignment="Center" />
 
                             <Label
                                 Style="{StaticResource SimpleLabelStyle}"
-                                Text="{Binding ActualPrice, StringFormat='${0:0.00} '}"
+                                Text="{Binding Product.ActualPrice, StringFormat='EGP {0:0.00}'}"
                                 TextDecorations="Strikethrough" />
 
-                            <Label
+                         <!--   <Label
                                 Style="{StaticResource SimpleLabelStyle}"
                                 Text="{Binding DiscountPercent, StringFormat=' ({0}% OFF)'}"
-                                TextColor="{DynamicResource PrimaryColor}" />
+                                TextColor="{DynamicResource PrimaryColor}" />-->
 
                         </StackLayout>
 
-                        <!--  Favourite Icon  -->
-                        <buttons:SfButton
-                            Grid.Row="0"
-                            Grid.RowSpan="2"
-                            Grid.Column="3"
-                            BorderColor="{DynamicResource Gray-300}"
-                            BorderWidth="1"
-                            Command="{Binding BindingContext.AddFavouriteCommand, Source={x:Reference detailPage}}"
-                            CommandParameter="{Binding .}"
-                            HorizontalOptions="End"
-                            Style="{StaticResource IconButtonStyle}"
-                            Text="{Binding IsFavourite, Converter={StaticResource BoolToStringConverter}, ConverterParameter=1}"
-                            TextColor="{Binding IsFavourite, Converter={x:StaticResource BoolToColorConverter}, ConverterParameter=4}" />
 
-                        <!--  Share Icon  -->
-                        <buttons:SfButton
-                            Grid.Row="2"
-                            Grid.RowSpan="2"
-                            Grid.Column="3"
-                            Margin="0,5,0,0"
-                            BorderColor="{DynamicResource Gray-300}"
-                            BorderWidth="1"
-                            Command="{Binding BindingContext.ShareCommand, Source={x:Reference detailPage}}"
-                            CommandParameter="{Binding}"
-                            HorizontalOptions="End"
-                            Style="{StaticResource IconButtonStyle}"
-                            Text="{StaticResource Share}"
-                            VerticalOptions="Start" />
 
                         <BoxView
                             Grid.Row="{OnIdiom Default=5,
@@ -320,35 +285,6 @@
                             Color="{OnIdiom Default={DynamicResource Gray-100},
                                             Desktop={DynamicResource Gray-Bg},
                                             Converter={StaticResource DynamicResourceToColorConverter}}" />
-
-                        <!--  Size Label  -->
-                        <Label
-                            Grid.Row="{OnIdiom Default=6,
-                                               Phone=5}"
-                            Grid.Column="1"
-                            Grid.ColumnSpan="3"
-                            Margin="{OnIdiom Default='0,16',
-                                             Desktop='0,0,0,16'}"
-                            HorizontalOptions="Start"
-                            Style="{StaticResource TitleLabelStyle}"
-                            Text="Select Size" />
-
-                        <!--  Size variant buttons  -->
-                        <buttons:SfSegmentedControl
-                            Grid.Row="{OnIdiom Default=7,
-                                               Phone=6}"
-                            Grid.Column="1"
-                            Grid.ColumnSpan="3"
-                            Margin="{OnIdiom Default='0,0,0,16',
-                                             Desktop='0,0,0,8'}"
-                            HorizontalOptions="{OnIdiom Default=Start,
-                                                        Phone=Center}"
-                            ItemsSource="{Binding SizeVariants}"
-                            Style="{StaticResource SegmentedControlStyle}">
-                            <buttons:SfSegmentedControl.Behaviors>
-                                <behavior:SegmentedControlCommandBehavior Command="{Binding BindingContext.VariantCommand, Source={x:Reference detailPage}}" />
-                            </buttons:SfSegmentedControl.Behaviors>
-                        </buttons:SfSegmentedControl>
 
                         <BoxView
                             Grid.Row="8"
@@ -375,13 +311,7 @@
                             Orientation="Horizontal"
                             Spacing="10">
 
-                            <!--  Buy Now Button  -->
-                            <buttons:SfButton
-                                IsVisible="{OnIdiom Default=True,
-                                                    Phone=False}"
-                                Style="{StaticResource GradientButtonStyle}"
-                                Text="BUY NOW"
-                                WidthRequest="200" />
+             
 
                             <!--  Add To Cart Button  -->
                             <buttons:SfButton
@@ -390,7 +320,8 @@
                                 CommandParameter="{Binding .}"
                                 HorizontalOptions="{OnIdiom Default=Center,
                                                             Phone=CenterAndExpand}"
-                                Style="{StaticResource GradientButtonStyle}"
+                                Style="{StaticResource SimpleButtonStyle}"
+                                FontSize="15"
                                 Text="ADD TO CART"
                                 WidthRequest="200" />
                         </StackLayout>
@@ -416,9 +347,9 @@
                             HorizontalOptions="Start"
                             HorizontalTextAlignment="Start"
                             Style="{StaticResource DescriptionLabelStyle}"
-                            Text="{Binding Description}" />
+                            Text="{Binding Product.Description}" />
 
-                        <BoxView
+                      <!--  <BoxView
                             Grid.Row="11"
                             Grid.Column="0"
                             Grid.ColumnSpan="5"
@@ -427,20 +358,9 @@
                             Style="{StaticResource HorizontalSeparatorStyle}"
                             Color="{OnIdiom Default={DynamicResource Gray-100},
                                             Desktop={DynamicResource Gray-Bg},
-                                            Converter={StaticResource DynamicResourceToColorConverter}}" />
+                                            Converter={StaticResource DynamicResourceToColorConverter}}" /> -->
 
-                        <!--  Rating and Reviews  -->
-                        <local:FeedbackView
-                            Grid.Row="12"
-                            Grid.ColumnSpan="5"
-                            IsVisible="{Binding IsReviewVisible, Converter={StaticResource VisibilityConverter}}" />
-                        <Label
-                            Grid.Row="12"
-                            Grid.ColumnSpan="5"
-                            IsVisible="{Binding IsReviewVisible}"
-                            Style="{StaticResource TitleLabelStyle}"
-                            Text="Be the 1st one to review"
-                            VerticalOptions="CenterAndExpand" />
+                       
 
                     </Grid>
                 </ContentView>

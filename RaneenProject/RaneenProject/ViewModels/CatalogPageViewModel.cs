@@ -1,4 +1,5 @@
 using RaneenProject.Models;
+using RaneenProject.Views;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
@@ -33,6 +34,8 @@ namespace RaneenProject.ViewModels
         private Command cardItemCommand;
 
         private string cartItemCount;
+
+        INavigation Navigation => Application.Current.MainPage.Navigation;
 
         #endregion
 
@@ -271,6 +274,8 @@ namespace RaneenProject.ViewModels
         /// <param name="attachedObject">The Object</param>
         private void ItemSelected(object attachedObject)
         {
+            /// ggggg
+            Navigation.PushAsync(new DetailPage(attachedObject as Product));
             // Do something
         }
 
