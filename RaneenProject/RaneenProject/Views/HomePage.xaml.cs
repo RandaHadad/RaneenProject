@@ -1,4 +1,4 @@
-﻿using RaneenProject.Data;
+﻿
 using RaneenProject.Models;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,6 @@ namespace RaneenProject.Views
     public partial class HomePage : ContentPage
     {
 
-        ProductDB firebaseHelper = new ProductDB();
         public ObservableCollection<OfferImage> WideOffers { get; set; }
         public ObservableCollection<OfferImage> WideOffers2 { get; set; }
         public HomePage()
@@ -34,14 +33,6 @@ namespace RaneenProject.Views
                 new OfferImage { Name="widelast1" ,Source="widelast1.png" },
                 new OfferImage { Name="wideArrivals1" ,Source="wideArrivals1.png" },
             };
-        }
-
-        protected async override void OnAppearing()
-        {
-            base.OnAppearing();
-            var allProducts = await firebaseHelper.GetAllProducts();
-           lstProducts.ItemsSource = allProducts;
-            Console.WriteLine(allProducts);
         }
 
         private void searchBar_TextChanged(object sender, TextChangedEventArgs e)
