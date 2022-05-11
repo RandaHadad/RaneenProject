@@ -1,4 +1,5 @@
-﻿using RaneenProject.Models;
+﻿
+using RaneenProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,11 +15,13 @@ namespace RaneenProject.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
+
         public ObservableCollection<OfferImage> WideOffers { get; set; }
         public ObservableCollection<OfferImage> WideOffers2 { get; set; }
         public HomePage()
         {
             InitializeComponent();
+
             CVwideOffers.ItemsSource = WideOffers = new ObservableCollection<OfferImage> {
                 new OfferImage { Name="wideOffer1" ,Source="wideOffer1.png" },
                 new OfferImage { Name="wideOffer2" ,Source="wideOffer2.png" },
@@ -49,5 +52,7 @@ namespace RaneenProject.Views
             await Task.Delay(1500);
             myRefreshView.IsRefreshing = false;
         }
+
+
     }
 }

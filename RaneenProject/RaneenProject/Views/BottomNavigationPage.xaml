@@ -24,8 +24,8 @@
         </local:HomePage.IconImageSource>
     </local:HomePage>
 
-    <local:CatalogTilePage Title="Catalog">
-        <local:CatalogTilePage.IconImageSource>
+    <local:CategoryTilePage Title="Catalog">
+        <local:CategoryTilePage.IconImageSource>
             <FontImageSource
                 FontFamily="FontIcons"
                 Glyph="{StaticResource Category}"
@@ -33,8 +33,8 @@
         </local:CategoryTilePage.IconImageSource>
     </local:CategoryTilePage>
 
-    <local:HomePage Title="Deals">
-        <local:HomePage.IconImageSource>
+    <local:CatalogTilePage Title="Deals">
+        <local:CatalogTilePage.IconImageSource>
             <FontImageSource
                 FontFamily="FontIcons"
                 Glyph="{StaticResource FlashSale}"
@@ -51,8 +51,8 @@
         </local:CartPage.IconImageSource>
     </local:CartPage>
 
-    <local:HomePage Title="Profile">
-        <local:HomePage.IconImageSource>
+    <localProfileTab:LandingPage Title="Profile">
+        <localProfileTab:LandingPage.IconImageSource>
             <FontImageSource
                 FontFamily="FontIcons"
                 Glyph="{StaticResource Account}"
