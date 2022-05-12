@@ -122,8 +122,8 @@
                                     VerticalOptions="Center">
                                     <Image
                                         BackgroundColor="{DynamicResource Gray-200}"
-                                        HeightRequest="64"
-                                        WidthRequest="64"
+                                        HeightRequest="72"
+                                        WidthRequest="72"
                                         Source="{Binding Image}"
                                         >
                                         <!--<Image.Source>
