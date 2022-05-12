@@ -98,13 +98,13 @@
                         </Image>
                     </Grid>
                     
-                        <ListView x:Name="lstProducts">
+                        <!--<ListView x:Name="lstProducts">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <TextCell Text="{Binding Name}"></TextCell>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
-                        </ListView>
+                        </ListView>-->
                     
 
                 </StackLayout>

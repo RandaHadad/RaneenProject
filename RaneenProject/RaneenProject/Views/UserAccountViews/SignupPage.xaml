@@ -4,7 +4,7 @@
              x:Class="RaneenProject.Views.UserAccountViews.SignupPage"
              Title="Sign up"
              BackgroundColor="#F0F3F8">
-    
+
     <ContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="#F0F3F8" Margin="0,0,0,40">
@@ -22,7 +22,6 @@
                 <Label Text="First Name"
                        TextColor="Black"
                        Padding="30, 20, 0, 0"/>
-
                 <Frame CornerRadius="5"
                    Padding="0"
                    Margin="30, 0, 30, 0">
@@ -46,8 +45,9 @@
                 <Frame CornerRadius="5"
                    Padding="0"
                    Margin="30, 0, 30, 0">
-                    <Entry BackgroundColor="white"
-                   TextColor="Black"
+                    <Entry BackgroundColor="White"
+                           x:Name="UserNewEmail"
+                           TextColor="Black"
                    FontSize="14"/>
                 </Frame>
                 <Label Text="Phone"
@@ -68,11 +68,13 @@
                    Padding="0"
                    Margin="30, 0, 30, 0">
                     <Entry BackgroundColor="white"
+                           x:Name="UserNewPassword"
                    TextColor="Black"
                    FontSize="14"/>
                 </Frame>
 
                 <Button Text="Sign up"
+                        Clicked="signupbutton_Clicked"
                         BackgroundColor="Green" 
                         CornerRadius="5"
                         Margin="30, 30, 30, 20"/>
