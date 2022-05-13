@@ -27,8 +27,10 @@
                    Margin="30, 0, 30, 0">
                     <Entry BackgroundColor="white"
                    TextColor="Black"
+                           x:Name="UserNewFirstName"
                    FontSize="14"/>
                 </Frame>
+                
                 <Label Text="Last Name"
                        TextColor="Black"
                        Padding="30, 20, 0, 0"/>
@@ -37,8 +39,11 @@
                    Margin="30, 0, 30, 0">
                     <Entry BackgroundColor="white"
                    TextColor="Black"
+                           x:Name="UserNewLastName"
+                           
                    FontSize="14"/>
                 </Frame>
+                
                 <Label Text="Email"
                        TextColor="Black"
                        Padding="30, 20, 0, 0"/>
@@ -50,6 +55,7 @@
                            TextColor="Black"
                    FontSize="14"/>
                 </Frame>
+                
                 <Label Text="Phone"
                        TextColor="Black"
                        Padding="30, 20, 0, 0"/>
@@ -58,8 +64,11 @@
                    Margin="30, 0, 30, 0">
                     <Entry BackgroundColor="white"
                    TextColor="Black"
+                           x:Name="UserNewPhone"
+                           
                    FontSize="14"/>
                 </Frame>
+                
                 <Label Text="Password"
                        TextColor="Black"
                        Padding="30, 20, 0, 0"/>

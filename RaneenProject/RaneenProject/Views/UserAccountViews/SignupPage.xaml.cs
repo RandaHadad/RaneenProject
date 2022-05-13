@@ -1,7 +1,11 @@
 ﻿using Firebase.Auth;
 using Newtonsoft.Json;
+using RaneenProject.Data;
+using RaneenProject.Models;
 using RaneenProject.Views.ProfilePageViews;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -13,6 +17,7 @@ namespace RaneenProject.Views.UserAccountViews
     public partial class SignupPage : ContentPage
     {
         public string WebAPIkey = "AIzaSyDsFm9Tuv4Brz9WJM4Q-qVLzd5wtLpie80";
+        UsersDB firebaseHelper = new UsersDB(); 
 
         // Launcher.OpenAsync is provided by Xamarin.Essentials.
         public ICommand TapCommand => new Command(loginPage);
@@ -38,6 +43,21 @@ namespace RaneenProject.Views.UserAccountViews
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig(WebAPIkey));
                 //await DisplayAlert($"{UserNewEmail.Text}, {UserNewPassword.Text}", "ok","cancel");
                 var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(UserNewEmail.Text, UserNewPassword.Text);
+               
+                //Adding user info to Realtime Database
+                Users nuser = new Users()
+                {
+                    Firstname=UserNewFirstName.Text,
+                    Lastname=UserNewLastName.Text,
+                    Email= UserNewEmail.Text,
+                    Phone = UserNewPhone.Text,
+                    Cart = new List<Product>(),
+                    Wishlist = new List<Product>(),
+
+                };
+                firebaseHelper.AddUser(nuser);
+
+                ////////////////////////////////
                 string gettoken = auth.FirebaseToken;
                 await App.Current.MainPage.DisplayAlert("Alert", gettoken, "Ok");
             }

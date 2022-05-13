@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using RaneenProject.Views.ProfilePageViews;
+using System;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,8 +13,16 @@ namespace RaneenProject.Views.UserAccountViews
         public LandingPage()
         {
             InitializeComponent();
+            var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+            if (savedfirebaseauth != null)
+            {
+                var targetpage = new ProfilePage();
+                NavigationPage.SetHasBackButton(targetpage, false);
+                NavigationPage.SetHasNavigationBar(targetpage, true);
+                Navigation.PushAsync(targetpage);
+            }
         }
-
+    
         private void signinPage(object sender, EventArgs e)
         {
             var targetpage = new LoginPage();

@@ -1,6 +1,13 @@
-﻿using RaneenProject.Models;
+﻿using Newtonsoft.Json;
+using RaneenProject.Data;
+using RaneenProject.Models;
+using RaneenProject.Views;
+using RaneenProject.Views.UserAccountViews;
+using System;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -13,6 +20,8 @@ namespace RaneenProject.ViewModels
     [DataContract]
     public class WishlistPageViewModel : BaseViewModel
     {
+        private UsersDB dB;
+
         #region Fields
 
         private ObservableCollection<Product> wishlistDetails;
@@ -234,20 +243,52 @@ namespace RaneenProject.ViewModels
         /// Invoked when cart button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void CartClicked(object obj)
+        private  void CartClicked(object obj)
         {
-            // Do something
+            var targetpage = new CartPage();
+            NavigationPage.SetHasBackButton(targetpage, true);
+            NavigationPage.SetHasNavigationBar(targetpage, true);
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
+            
         }
 
         /// <summary>
         /// Invoked when add to cart button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void AddToCartClicked(object obj)
+        private async void AddToCartClicked(object obj)
         {
-            this.cartItemCount = this.cartItemCount ?? 0;
-            this.CartItemCount += 1;
+            var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+            
+
+            if (savedfirebaseauth != null)
+            {
+                Product p = obj as Product;
+            
+                this.cartItemCount = this.cartItemCount ?? 0;
+
+                dB = new UsersDB();
+                bool res = await dB.AddToCart( savedfirebaseauth.User.Email,p);
+                if(res == true)
+                {
+                    this.cartItemCount = this.cartItemCount ?? 0;
+                    this.CartItemCount += 1;
+                }
+              
+
+            }
+            else if (savedfirebaseauth == null)
+            {
+                var targetpage = new LandingPage();
+                NavigationPage.SetHasBackButton(targetpage, false);
+                NavigationPage.SetHasNavigationBar(targetpage, true);
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
+
+            }
+
+
         }
+      
 
         /// <summary>
         /// Invoked when an delete button is clicked.
