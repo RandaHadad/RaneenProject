@@ -33,6 +33,8 @@ namespace RaneenProject.Views.UserAccountViews
 
         async void loginbutton_Clicked(System.Object sender, System.EventArgs e)
         {
+            errormssg.IsVisible = false;
+
             var authProvider = new FirebaseAuthProvider(new FirebaseConfig(WebAPIkey));
             try
             {
@@ -42,14 +44,20 @@ namespace RaneenProject.Views.UserAccountViews
                 Preferences.Set("MyFirebaseRefreshToken", serializedcontnet);
 
                 var targetpage = new ProfilePage();
-                NavigationPage.SetHasBackButton(targetpage, false);
-                NavigationPage.SetHasNavigationBar(targetpage, true);
+                NavigationPage.SetHasNavigationBar(targetpage, false);
                 await Navigation.PushAsync(targetpage);
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", "Invalid useremail or password", "OK");
+                errormssg.IsVisible = true;
+                //await App.Current.MainPage.DisplayAlert("Alert", "Invalid useremail or password", "OK");
             }
+
+        }
+
+        private void backButton(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
         }
     }
 }

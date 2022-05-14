@@ -20,12 +20,14 @@ namespace RaneenProject.Views.ProfilePageViews
         public ICommand TapCommandAboutus => new Command(AboutUsPage);
         public ICommand TapCommandLandingPage => new Command(Logout_Clicked);
 
+        String fname;
+        String lname;
+        String email;
 
         private void AccountInformationPage(object obj)
-        {
+        {           
             var targetpage = new AccountInformationPage();
-            NavigationPage.SetHasBackButton(targetpage, true);
-            NavigationPage.SetHasNavigationBar(targetpage, true);
+            NavigationPage.SetHasNavigationBar(targetpage, false);
             Navigation.PushAsync(targetpage);
         }
 
@@ -46,8 +48,8 @@ namespace RaneenProject.Views.ProfilePageViews
         public ProfilePage()
         {
             InitializeComponent();
-            BindingContext = this;
             GetProfileInformationAndRefreshToken();
+            BindingContext = this;
         }
 
         async private void GetProfileInformationAndRefreshToken()
@@ -61,7 +63,11 @@ namespace RaneenProject.Views.ProfilePageViews
                 var RefreshedContent = await authProvider.RefreshAuthAsync(savedfirebaseauth);
                 Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(RefreshedContent));
                 //Now lets grab user information
-                MyUserName.Text = savedfirebaseauth.User.Email;
+                fname = savedfirebaseauth.User.FirstName;
+                lname = savedfirebaseauth.User.LastName;
+                email = savedfirebaseauth.User.Email;
+                MyUserEmail.Text = savedfirebaseauth.User.Email;
+                MyUserName.Text = $"{savedfirebaseauth.User.FirstName} {savedfirebaseauth.User.LastName}";
             }
             catch (Exception ex)
             {
@@ -74,7 +80,7 @@ namespace RaneenProject.Views.ProfilePageViews
         {
             Preferences.Remove("MyFirebaseRefreshToken");
             //TODO: confirm mssg
-            var targetpage = new NavigationPage(new BottomNavigationPage());
+            var targetpage = new LandingPage();
             NavigationPage.SetHasNavigationBar(targetpage, false);
             Navigation.PushAsync(targetpage);
         }

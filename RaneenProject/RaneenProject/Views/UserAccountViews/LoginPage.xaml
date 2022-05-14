@@ -1,9 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:RaneenProject.Controls" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:controls="clr-namespace:RaneenProject.Controls" 
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              x:Class="RaneenProject.Views.UserAccountViews.LoginPage"
              Title="Sign In"
              BackgroundColor="#F0F3F8">
+
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout Spacing="0">
+                <!--  Title View  -->
+                <controls:TitleView Title="Signin">
+                    <!--  Back button command  -->
+                    <controls:TitleView.LeadingView>
+                        <buttons:SfButton
+                            x:Name="backButton"
+                            Clicked="backButton"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Back}" />
+                    </controls:TitleView.LeadingView>
+                </controls:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
 
     <ContentPage.Content>
         <StackLayout BackgroundColor="#F0F3F8" >
@@ -15,8 +36,8 @@
                    Margin="30, 0, 30, 0">
                 <Entry BackgroundColor="white"
                        x:Name="UserLoginEmail"
-                   TextColor="Black"
-                   FontSize="14"/>
+                       TextColor="Black"
+                       FontSize="14"/>
             </Frame>
             <Label Text="Password"
                    TextColor="Black"
@@ -27,14 +48,20 @@
                    Margin="30, 0, 30, 0">
                 <Entry BackgroundColor="white"
                        x:Name="UserLoginPassword"
-                   TextColor="Black"
-                   FontSize="14"
+                       TextColor="Black"
+                       FontSize="14"
                        IsPassword="True"/>
             </Frame>
             <Label Text="Forgot Password?"
                    TextColor="DarkGray"
                    Padding="0, 0, 30, 0"
                    HorizontalOptions="End"/>
+
+            <Label Text="Email or Password are invalid"
+                   x:Name="errormssg"
+                   Padding="30,10,0,0"
+                   TextColor="red"
+                   IsVisible="false"/>
 
             <Button Text="Sign in"
                     Clicked="loginbutton_Clicked"
@@ -46,14 +73,14 @@
                 Orientation="Horizontal"
                 HorizontalOptions="Center">
                 <Label Text="Don't have an account?"
-                   TextColor="DarkGray"
-                   Padding="0, 0, 0, 0"
-                   HorizontalOptions="Center"/>
+                       TextColor="DarkGray"
+                       Padding="0, 0, 0, 0"
+                       HorizontalOptions="Center"/>
                 <Label Text="sign up"
-                   TextColor="Gray"
-                   Padding="10, 0, 0, 10"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center">
+                       TextColor="Gray"
+                       Padding="10, 0, 0, 10"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding TapCommand}"/>
                     </Label.GestureRecognizers>
