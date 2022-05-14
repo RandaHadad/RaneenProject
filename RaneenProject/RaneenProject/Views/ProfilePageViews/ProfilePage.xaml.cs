@@ -80,7 +80,7 @@ namespace RaneenProject.Views.ProfilePageViews
         {
             Preferences.Remove("MyFirebaseRefreshToken");
             //TODO: confirm mssg
-            var targetpage = new NavigationPage(new BottomNavigationPage());
+            var targetpage = new LandingPage();
             NavigationPage.SetHasNavigationBar(targetpage, false);
             Navigation.PushAsync(targetpage);
         }
