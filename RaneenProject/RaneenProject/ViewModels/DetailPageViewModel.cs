@@ -4,6 +4,8 @@ using RaneenProject.Models;
 using RaneenProject.Views.UserAccountViews;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
@@ -76,12 +78,24 @@ namespace RaneenProject.ViewModels
         public DetailPageViewModel(Product _product)
         {
             product = _product;
+            RecommendedProducts = PopulateData("ecommerce.json");
         }
+
+        
 
         #endregion
 
         #region Public properties
 
+        /// <summary>
+        /// Gets or sets the property that has been bound with a list view, which displays the item details in tile.
+        /// </summary>
+        [DataMember(Name = "recommendedproducts")]
+        public List<Product> RecommendedProducts
+        {
+            get;
+            set;
+        }
 
         public Product Product
         {
@@ -90,6 +104,7 @@ namespace RaneenProject.ViewModels
                 return product;
             }
         }
+
 
         /// <summary>
         /// Gets or sets the value of detail page view model.
@@ -531,6 +546,33 @@ namespace RaneenProject.ViewModels
       private void LoadMoreClicked(object obj)
         {
             // Do something
+        }
+
+        /// <summary>
+        /// Populates the data for view model from json file.
+        /// </summary>
+        /// <typeparam name="T">Type of view model.</typeparam>
+        /// <param name="fileName">Json file to fetch data.</param>
+        /// <returns>Returns the view model object.</returns>
+        private List<Product> PopulateData(string fileName)
+        {
+            var file = "RaneenProject.Data." + fileName;
+            List<Product> items;
+
+            var assembly = typeof(App).GetTypeInfo().Assembly;
+
+            using (var stream = assembly.GetManifestResourceStream(file))
+            using(var reader = new StreamReader(stream))
+            {
+                var json = reader.ReadToEnd();
+                var data = (JObject)JsonConvert.DeserializeObject(json);
+                var v = data.SelectToken("recommendedproducts");
+                var jj = JsonConvert.SerializeObject(v);
+                items = JsonConvert.DeserializeObject<List<Product>>(jj);
+                Debug.WriteLine("Answer: " + v);
+            }
+           
+            return items;
         }
 
         #endregion

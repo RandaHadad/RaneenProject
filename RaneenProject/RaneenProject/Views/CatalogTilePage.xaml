@@ -17,7 +17,7 @@
     BackgroundColor="{OnIdiom Default={DynamicResource Gray-Bg},
                               Desktop={DynamicResource Gray-100},
                               Converter={StaticResource DynamicResourceToColorConverter}}"
-    NavigationPage.HasNavigationBar="False">
+    Shell.NavBarIsVisible="False">
 
     <ContentPage.Behaviors>
         <behavior:CartBehavior />

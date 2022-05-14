@@ -14,7 +14,7 @@ namespace RaneenProject.Droid
 {
 	
 	
-	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.2.4.160")]
+	[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Android.Build.Tasks", "12.1.0.11")]
 	public partial class Resource
 	{
 		
@@ -20875,49 +20875,52 @@ namespace RaneenProject.Droid
 			public const int test_custom_background = 2131165394;
 			
 			// aapt resource value: 0x7F0700D3
-			public const int tooltip_frame_dark = 2131165395;
+			public const int thunder = 2131165395;
 			
 			// aapt resource value: 0x7F0700D4
-			public const int tooltip_frame_light = 2131165396;
+			public const int tooltip_frame_dark = 2131165396;
 			
 			// aapt resource value: 0x7F0700D5
-			public const int user = 2131165397;
+			public const int tooltip_frame_light = 2131165397;
 			
 			// aapt resource value: 0x7F0700D6
-			public const int user1 = 2131165398;
+			public const int user = 2131165398;
 			
 			// aapt resource value: 0x7F0700D7
-			public const int user2 = 2131165399;
+			public const int user1 = 2131165399;
 			
 			// aapt resource value: 0x7F0700D8
-			public const int wideArrivals1 = 2131165400;
+			public const int user2 = 2131165400;
 			
 			// aapt resource value: 0x7F0700D9
-			public const int wideFull1 = 2131165401;
+			public const int wideArrivals1 = 2131165401;
 			
 			// aapt resource value: 0x7F0700DA
-			public const int wideFull2 = 2131165402;
+			public const int wideFull1 = 2131165402;
 			
 			// aapt resource value: 0x7F0700DB
-			public const int wideFull3 = 2131165403;
+			public const int wideFull2 = 2131165403;
 			
 			// aapt resource value: 0x7F0700DC
-			public const int widelast1 = 2131165404;
+			public const int wideFull3 = 2131165404;
 			
 			// aapt resource value: 0x7F0700DD
-			public const int widelast1png = 2131165405;
+			public const int widelast1 = 2131165405;
 			
 			// aapt resource value: 0x7F0700DE
-			public const int wideOffer1 = 2131165406;
+			public const int widelast1png = 2131165406;
 			
 			// aapt resource value: 0x7F0700DF
-			public const int wideOffer2 = 2131165407;
+			public const int wideOffer1 = 2131165407;
 			
 			// aapt resource value: 0x7F0700E0
-			public const int wideOffer3 = 2131165408;
+			public const int wideOffer2 = 2131165408;
 			
 			// aapt resource value: 0x7F0700E1
-			public const int wideOffer4 = 2131165409;
+			public const int wideOffer3 = 2131165409;
+			
+			// aapt resource value: 0x7F0700E2
+			public const int wideOffer4 = 2131165410;
 			
 			static Drawable()
 			{

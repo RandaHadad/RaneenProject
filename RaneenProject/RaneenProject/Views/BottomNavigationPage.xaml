@@ -1,63 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage
+<Shell
     x:Class="RaneenProject.Views.BottomNavigationPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
     xmlns:local="clr-namespace:RaneenProject.Views" 
     xmlns:localProfileTab="clr-namespace:RaneenProject.Views.UserAccountViews"
-    android:TabbedPage.BarItemColor="{DynamicResource Steel}"
-    android:TabbedPage.BarSelectedItemColor="{DynamicResource PrimaryColor}"
-    android:TabbedPage.ToolbarPlacement="Bottom"
-    BackgroundColor="{DynamicResource Gray-Bg}"
-    BarBackgroundColor="{DynamicResource Gray-Bg}"
-    NavigationPage.HasNavigationBar="False">
-    
-    
-    
-    <local:HomePage Title="Home">
-        <local:HomePage.IconImageSource>
-            <FontImageSource
-                FontFamily="FontIcons"
-                Glyph="{StaticResource Home}"
-                Size="16" />
-        </local:HomePage.IconImageSource>
-    </local:HomePage>
+    Shell.NavBarIsVisible="False">
 
-    <local:CategoryTilePage Title="Catalog">
-        <local:CategoryTilePage.IconImageSource>
-            <FontImageSource
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="White" />
+                <Setter Property="Shell.ForegroundColor" Value="Gray" />
+                <Setter Property="Shell.TitleColor" Value="Black" />
+                <Setter Property="Shell.DisabledColor" Value="Black" />
+                <Setter Property="Shell.UnselectedColor" Value="Black" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="White" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="Black"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="Black"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="Red"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+        </ResourceDictionary>
+    </Shell.Resources>
+    
+    <TabBar>
+        <Tab Title="Home">
+            <Tab.Icon>
+                <FontImageSource
+                        FontFamily="FontIcons"
+                        Glyph="{StaticResource Home}"
+                        Size="16" />
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate local:HomePage}" Route="HomePage"/>
+        </Tab>
+
+
+        <Tab Title="Category">
+            <Tab.Icon>
+                <FontImageSource
                 FontFamily="FontIcons"
                 Glyph="{StaticResource Category}"
                 Size="16" />
-        </local:CategoryTilePage.IconImageSource>
-    </local:CategoryTilePage>
+            </Tab.Icon>
+            <ShellContent  ContentTemplate="{DataTemplate local:CategoryTilePage}" Route="CategoryTilePage"/>
+        </Tab>
 
-    <local:CatalogTilePage Title="Deals">
-        <local:CatalogTilePage.IconImageSource>
-            <FontImageSource
-                FontFamily="FontIcons"
-                Glyph="{StaticResource FlashSale}"
-                Size="16" />
-        </local:CatalogTilePage.IconImageSource>
-    </local:CatalogTilePage>
+        <ShellContent Title="Deal" Icon="thunder.png" ContentTemplate="{DataTemplate local:CatalogTilePage}" Route="CatalogTilePage" />
 
-    <local:CartPage Title="Cart">
-        <local:CartPage.IconImageSource>
-            <FontImageSource
+
+        <Tab Title="Cart">
+            <Tab.Icon>
+                <FontImageSource
                 FontFamily="FontIcons"
                 Glyph="{StaticResource Cart}"
                 Size="16" />
-        </local:CartPage.IconImageSource>
-    </local:CartPage>
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate local:CartPage}" Route="CartPage"/>
+        </Tab>
 
-    <localProfileTab:LandingPage Title="Profile">
-        <localProfileTab:LandingPage.IconImageSource>
-            <FontImageSource
+
+        <Tab Title="Profile">
+            <Tab.Icon>
+                <FontImageSource
                 FontFamily="FontIcons"
                 Glyph="{StaticResource Account}"
                 Size="16" />
-        </localProfileTab:LandingPage.IconImageSource>
-    </localProfileTab:LandingPage>
+            </Tab.Icon>
+            <ShellContent ContentTemplate="{DataTemplate localProfileTab:LandingPage}" Route="LandingPage"/>
+        </Tab>
+
+    </TabBar>
     
-</TabbedPage>
+</Shell>
