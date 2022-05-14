@@ -51,14 +51,18 @@ namespace RaneenProject.Views.UserAccountViews
                     Lastname=UserNewLastName.Text,
                     Email= UserNewEmail.Text,
                     Phone = UserNewPhone.Text,
-                    Cart = new List<Product>(),
-                    Wishlist = new List<Product>(),
-
+                    Cart = new List<Product>() { new Product()},
+                    Wishlist = new List<Product>() { new Product() },
                 };
-                firebaseHelper.AddUser(nuser);
+
+               bool res = await firebaseHelper.AddUser(nuser);
                 ////////////////////////////////
-                string gettoken = auth.FirebaseToken;
-                await App.Current.MainPage.DisplayAlert("Alert", gettoken, "Ok");
+                if (res)
+                {
+                    string gettoken = auth.FirebaseToken;
+                    await App.Current.MainPage.DisplayAlert("Alert", gettoken, "Ok");
+                }
+       
             }
             catch (Exception ex)
             {
