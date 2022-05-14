@@ -49,7 +49,7 @@ namespace RaneenProject.ViewModels
 
 
 
-       // private Command addFavouriteCommand;
+        private Command addFavouriteCommand;
 
         private Command addToCartCommand;
 
@@ -323,13 +323,13 @@ namespace RaneenProject.ViewModels
         /// <summary>
         /// Gets or sets the command that will be executed when the Favourite button is clicked.
         /// </summary>
-        /* public Command AddFavouriteCommand
+        public Command AddFavouriteCommand
          {
              get
              {
                  return this.addFavouriteCommand ?? (this.addFavouriteCommand = new Command(this.AddFavouriteClicked));
              }
-         }*/
+         }
 
         /// <summary>
         /// Gets or sets the command that will be executed when the AddToCart button is clicked.
@@ -452,13 +452,13 @@ namespace RaneenProject.ViewModels
         /// Invoked when the Favourite button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-      /*  private void AddFavouriteClicked(object obj)
+       private void AddFavouriteClicked(object obj)
         {
-            if (obj is DetailPageViewModel model)
+            if (obj is Product model)
             {
                 model.IsFavourite = !model.IsFavourite;
             }
-        }*/
+        }
 
         /// <summary>
         /// Invoked when the Cart button is clicked.
@@ -535,7 +535,6 @@ namespace RaneenProject.ViewModels
                 var v = data.SelectToken("recommendedproducts");
                 var jj = JsonConvert.SerializeObject(v);
                 items = JsonConvert.DeserializeObject<List<Product>>(jj);
-                Debug.WriteLine("Answer: " + v);
             }
            
             return items;
