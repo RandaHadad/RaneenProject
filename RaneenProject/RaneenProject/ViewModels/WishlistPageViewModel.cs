@@ -13,6 +13,7 @@ using Xamarin.Forms.Internals;
 
 namespace RaneenProject.ViewModels
 {
+
     /// <summary>
     /// ViewModel for wishlist page.
     /// </summary>

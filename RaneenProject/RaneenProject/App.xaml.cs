@@ -23,6 +23,7 @@ namespace RaneenProject
             //MainPage = new CartPage();
             //MainPage = new CartPage();
             MainPage = new BottomNavigationPage();
+
         }
 
         protected override void OnStart()

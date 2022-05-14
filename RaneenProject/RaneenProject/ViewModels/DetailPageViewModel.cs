@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using RaneenProject.Data;
 using RaneenProject.Models;
+using RaneenProject.Views;
 using RaneenProject.Views.UserAccountViews;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -458,12 +459,36 @@ namespace RaneenProject.ViewModels
         /// Invoked when the Favourite button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-       private void AddFavouriteClicked(object obj)
+        private async void AddFavouriteClicked(object obj)
         {
-            if (obj is Product model)
+            var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+
+            if (savedfirebaseauth != null)
             {
-                model.IsFavourite = !model.IsFavourite;
+                DetailPageViewModel p = obj as DetailPageViewModel;
+                this.cartItemCount = this.cartItemCount ?? 0;
+
+                dB = new UsersDB();
+                bool res = await dB.AddToWishlist(savedfirebaseauth.User.Email, p.Product);
+                if (res == true)
+                {
+                    if (obj is DetailPageViewModel model)
+                    {
+                        model.IsFavourite = !model.IsFavourite;
+                    }
+                }
+
+
             }
+            else if (savedfirebaseauth == null)
+            {
+                var targetpage = new LandingPage();
+                NavigationPage.SetHasBackButton(targetpage, false);
+                NavigationPage.SetHasNavigationBar(targetpage, true);
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
+
+            }
+          
         }
 
         /// <summary>
@@ -472,7 +497,7 @@ namespace RaneenProject.ViewModels
         /// <param name="obj">The Object</param>
         private async void AddToCartClickedAsync(object obj)
         {
-           var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+            var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
 
             if (savedfirebaseauth != null)
             {
@@ -537,7 +562,9 @@ namespace RaneenProject.ViewModels
         /// <param name="obj">The Object.</param>
        private void CartClicked(object obj)
         {
-            // Do something
+            var targetpage = new CartPage();
+            NavigationPage.SetHasNavigationBar(targetpage, false);
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
         }
 
         /// <summary>
