@@ -246,8 +246,7 @@ namespace RaneenProject.ViewModels
         private  void CartClicked(object obj)
         {
             var targetpage = new CartPage();
-            NavigationPage.SetHasBackButton(targetpage, true);
-            NavigationPage.SetHasNavigationBar(targetpage, true);
+            NavigationPage.SetHasNavigationBar(targetpage, false);
             Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
             
         }
@@ -274,15 +273,13 @@ namespace RaneenProject.ViewModels
                     this.cartItemCount = this.cartItemCount ?? 0;
                     this.CartItemCount += 1;
                 }
-              
 
             }
             else if (savedfirebaseauth == null)
             {
                 var targetpage = new LandingPage();
-                NavigationPage.SetHasBackButton(targetpage, false);
-                NavigationPage.SetHasNavigationBar(targetpage, true);
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
+                 NavigationPage.SetHasNavigationBar(targetpage, true);
+                 Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
 
             }
 

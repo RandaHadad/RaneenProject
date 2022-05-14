@@ -17,8 +17,7 @@ namespace RaneenProject.Views.UserAccountViews
             if (savedfirebaseauth != null)
             {
                 var targetpage = new ProfilePage();
-                NavigationPage.SetHasBackButton(targetpage, false);
-                NavigationPage.SetHasNavigationBar(targetpage, true);
+                NavigationPage.SetHasNavigationBar(targetpage, false);
                 Navigation.PushAsync(targetpage);
             }
         }

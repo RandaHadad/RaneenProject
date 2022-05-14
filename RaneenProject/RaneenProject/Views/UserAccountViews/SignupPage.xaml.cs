@@ -56,7 +56,6 @@ namespace RaneenProject.Views.UserAccountViews
 
                 };
                 firebaseHelper.AddUser(nuser);
-
                 ////////////////////////////////
                 string gettoken = auth.FirebaseToken;
                 await App.Current.MainPage.DisplayAlert("Alert", gettoken, "Ok");

@@ -96,8 +96,8 @@ namespace RaneenProject.Data
             {
                 var toUpdatePerson = (await firebase
                 .Child("Users")
-                .Child("Cart").
-                OnceAsync <Users>()).Where(a => a.Object.Email == email).FirstOrDefault();
+                .Child("Cart")
+                .OnceAsync<Users>()).Where(a => a.Object.Email == email).FirstOrDefault();
 
                 if (toUpdatePerson != null)
                 {
@@ -106,6 +106,8 @@ namespace RaneenProject.Data
                     {
                         p = toUpdatePerson.Object.Cart;
                         p.Add(product);
+                        await App.Current.MainPage.DisplayAlert("YourApp",p.Count().ToString() , "Ok");
+
                     }
                     else
                     {
@@ -113,10 +115,21 @@ namespace RaneenProject.Data
                     }
 
                     await firebase
-                      .Child("Users")
+                      .Child("Users")                      
                       .Child(toUpdatePerson.Key)
                       .Child("Cart")
-                      .PutAsync(p);
+                      .PutAsync(new Users()
+                      {
+                          Firstname = toUpdatePerson.Object.Firstname,
+                          Lastname = toUpdatePerson.Object.Lastname,
+                          Email = toUpdatePerson.Object.Email,
+                          Phone = toUpdatePerson.Object.Phone,
+                          Cart = p,
+                          Wishlist = toUpdatePerson.Object.Wishlist,
+
+                      })
+
+                      //.PutAsync(p);
                 }
                 return true;
             }
@@ -162,8 +175,8 @@ namespace RaneenProject.Data
                           Phone = toUpdatePerson.Object.Phone,
                           Cart = toUpdatePerson.Object.Cart,
                           Wishlist = p,
-
                       });
+
                 }
                 return true;
             }
