@@ -20,14 +20,7 @@ namespace RaneenProject
 
             InitializeComponent();
 
-<<<<<<< HEAD
-            //MainPage = new CartPage();
             MainPage = new BottomNavigationPage();
-
-=======
-            MainPage = new NavigationPage(new BottomNavigationPage());
-            //TODO: BtmNavBar always maps to landingpage
->>>>>>> d4c915bc7c66b5422d2ca4f768226b89abaa1b1e
         }
 
         protected override void OnStart()

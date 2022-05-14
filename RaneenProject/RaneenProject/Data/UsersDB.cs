@@ -115,7 +115,7 @@ namespace RaneenProject.Data
                     }
 
                     await firebase
-                      .Child("Users")                      
+                      .Child("Users")
                       .Child(toUpdatePerson.Key)
                       .Child("Cart")
                       .PutAsync(new Users()
@@ -127,7 +127,7 @@ namespace RaneenProject.Data
                           Cart = p,
                           Wishlist = toUpdatePerson.Object.Wishlist,
 
-                      })
+                      });
 
                       //.PutAsync(p);
                 }

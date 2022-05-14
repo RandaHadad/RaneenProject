@@ -16,5 +16,10 @@ namespace RaneenProject.Views.ProfilePageViews
         {
             InitializeComponent();
         }
+
+        private void backButton(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+        }
     }
 }

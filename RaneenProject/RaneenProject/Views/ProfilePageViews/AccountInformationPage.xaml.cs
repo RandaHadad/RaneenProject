@@ -15,17 +15,20 @@ namespace RaneenProject.Views.ProfilePageViews
         private void EditEmail(object sender, EventArgs e)
         {
             var targetpage = new EditEmail();
-            NavigationPage.SetHasBackButton(targetpage, true);
-            NavigationPage.SetHasNavigationBar(targetpage, true);
+            NavigationPage.SetHasNavigationBar(targetpage, false);
             Navigation.PushAsync(targetpage);
         }
 
         private void EditInfo(object sender, EventArgs e)
         {
             var targetpage = new EditInfo();
-            NavigationPage.SetHasBackButton(targetpage, true);
-            NavigationPage.SetHasNavigationBar(targetpage, true);
+            NavigationPage.SetHasNavigationBar(targetpage, false);
             Navigation.PushAsync(targetpage);
+        }
+
+        private void backButton(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
         }
     }
 }
