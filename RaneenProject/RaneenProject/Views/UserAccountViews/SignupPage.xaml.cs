@@ -43,7 +43,25 @@ namespace RaneenProject.Views.UserAccountViews
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig(WebAPIkey));
                 //await DisplayAlert($"{UserNewEmail.Text}, {UserNewPassword.Text}", "ok","cancel");
                 var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(UserNewEmail.Text, UserNewPassword.Text);
-               
+
+                Product emptyProduct = new Product()
+                {
+                    Name = string.Empty,
+                    ActualPrice = 0,
+                    Description = string.Empty,
+                    DiscountPercent = 0,
+                    DiscountPrice = 0,
+                    Id = -1,
+                    IsFavourite = false,
+                    OverallRating = 0,
+                    PreviewImage = "https://cdn3.iconfinder.com/data/icons/shopping-and-ecommerce-29/90/empty_cart-512.png",
+                   // PreviewImages = "",
+                   // Quantities = new List<object> {""},
+                    //Reviews = new ObservableCollection<Review> { new Review()},
+                    SellerName = string.Empty,
+                    //SizeVariants = new List<string> { },
+
+                };
                 //Adding user info to Realtime Database
                 Users nuser = new Users()
                 {
@@ -51,8 +69,8 @@ namespace RaneenProject.Views.UserAccountViews
                     Lastname=UserNewLastName.Text,
                     Email= UserNewEmail.Text,
                     Phone = UserNewPhone.Text,
-                    Cart = new List<Product>() { new Product()},
-                    Wishlist = new List<Product>() { new Product() },
+                    Cart = string.Empty,
+                    Wishlist = string.Empty,
                 };
 
                bool res = await firebaseHelper.AddUser(nuser);

@@ -13,8 +13,13 @@ namespace RaneenProject.Models
         public String Lastname { get; set; }
         public String Email { get; set; }
         public String Phone { get; set; }
-        public List<Product> Cart { get; set; }
-        public List<Product> Wishlist { get; set; }
-   
+        public String Cart { get; set; }
+        public String Wishlist { get; set; }
+
+        public override string ToString()
+        {
+            return $"Ana Hna :D => {Email}, {Firstname}";
+        }
+
     }
 }

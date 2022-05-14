@@ -1,13 +1,20 @@
+using Newtonsoft.Json;
+using RaneenProject.Data;
 using RaneenProject.Models;
 using RaneenProject.Views;
+using RaneenProject.Views.UserAccountViews;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace RaneenProject.ViewModels
 {
+   
+
     /// <summary>
     /// ViewModel for catalog page.
     /// </summary>
@@ -15,6 +22,7 @@ namespace RaneenProject.ViewModels
     [DataContract]
     public class CatalogPageViewModel : BaseViewModel
     {
+        private UsersDB dB;
         #region Fields
 
         private ObservableCollection<Category> filterOptions;
@@ -244,7 +252,7 @@ namespace RaneenProject.ViewModels
         {
             get
             {
-                return this.addFavouriteCommand ?? (this.addFavouriteCommand = new Command(this.AddFavouriteClicked));
+                return this.addFavouriteCommand ?? (this.addFavouriteCommand = new Command(this.AddFavouriteClickedAsync));
             }
         }
 
@@ -253,7 +261,7 @@ namespace RaneenProject.ViewModels
         /// </summary>
         public Command AddToCartCommand
         {
-            get { return this.addToCartCommand ?? (this.addToCartCommand = new Command(this.AddToCartClicked)); }
+            get { return this.addToCartCommand ?? (this.addToCartCommand = new Command(this.AddToCartClickedAsync)); }
         }
 
         /// <summary>
@@ -274,7 +282,7 @@ namespace RaneenProject.ViewModels
         /// <param name="attachedObject">The Object</param>
         private void ItemSelected(object attachedObject)
         {
-            /// ggggg
+           
             Navigation.PushAsync(new DetailPage(attachedObject as Product));
             // Do something
         }
@@ -285,6 +293,7 @@ namespace RaneenProject.ViewModels
         /// <param name="attachedObject">The Object</param>
         private void SortClicked(object attachedObject)
         {
+           
             // Do something
         }
 
@@ -297,25 +306,67 @@ namespace RaneenProject.ViewModels
             // Do something
         }
 
+
+
         /// <summary>
         /// Invoked when the favourite button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void AddFavouriteClicked(object obj)
+        private async void AddFavouriteClickedAsync(object obj)
         {
-            if (obj is Product product)
+            var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+            if (savedfirebaseauth != null)
             {
-                product.IsFavourite = !product.IsFavourite;
+                Product p = obj as Product;
+                
+
+                dB = new UsersDB();
+                bool res = await dB.AddToWishlist(savedfirebaseauth.User.Email, p);
+                if (res == true)
+                {
+                    if (obj is Product product)
+                    {
+                        product.IsFavourite = !product.IsFavourite;
+                    }
+                }
+
+
             }
+            else if (savedfirebaseauth == null)
+            {
+                var targetpage = new LandingPage();
+                NavigationPage.SetHasBackButton(targetpage, false);
+                NavigationPage.SetHasNavigationBar(targetpage, true);
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
+
+            }
+          
         }
 
         /// <summary>
         /// Invoked when the cart button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void AddToCartClicked(object obj)
+        private async void AddToCartClickedAsync(object obj)
         {
-            // Do something
+            var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+
+            if (savedfirebaseauth != null)
+            {
+                Product p = obj as Product;
+          
+                dB = new UsersDB();
+                bool res = await dB.AddToCart(savedfirebaseauth.User.Email, p);
+
+            }
+            else if (savedfirebaseauth == null)
+            {
+                var targetpage = new LandingPage();
+                NavigationPage.SetHasBackButton(targetpage, false);
+                NavigationPage.SetHasNavigationBar(targetpage, true);
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
+
+            }
         }
 
         /// <summary>
@@ -324,7 +375,9 @@ namespace RaneenProject.ViewModels
         /// <param name="obj"></param>
         private void CartClicked(object obj)
         {
-            // Do something
+            var targetpage = new CartPage();
+            NavigationPage.SetHasNavigationBar(targetpage, false);
+            Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
         }
 
         #endregion

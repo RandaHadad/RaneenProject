@@ -1,5 +1,7 @@
 ﻿using Firebase.Database;
 using Firebase.Database.Query;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RaneenProject.Models;
 using System;
 using System.Collections.Generic;
@@ -70,6 +72,7 @@ namespace RaneenProject.Data
             catch (Exception e)
             {
                 Debug.WriteLine($"Error:{e}");
+                await App.Current.MainPage.DisplayAlert($"Error:{e}", "OK", "Cancel");
                 return false;
             }
 
@@ -89,49 +92,49 @@ namespace RaneenProject.Data
 
 
         }
-
-        public async Task<bool> AddToCart(String email, Product product)
+        
+        public async Task<bool> AddToCart(string email, Product product)
         {
             try
             {
                 var toUpdatePerson = (await firebase
                 .Child("Users")
-                .Child("Cart")
                 .OnceAsync<Users>()).Where(a => a.Object.Email == email).FirstOrDefault();
 
-                if (toUpdatePerson != null)
-                {
-                    List<Product> p;
-                    if (toUpdatePerson.Object.Cart != null)
-                    {
-                        p = toUpdatePerson.Object.Cart;
-                        p.Add(product);
-                        await App.Current.MainPage.DisplayAlert("YourApp",p.Count().ToString() , "Ok");
+                ObservableCollection<Product> p;
 
+                if (toUpdatePerson.Object != null)
+                {
+
+                    if (toUpdatePerson.Object.Cart != string.Empty)
+                    {
+                        p = JsonConvert.DeserializeObject<ObservableCollection<Product>>(toUpdatePerson.Object.Cart);
+                        p.Add(product);
                     }
                     else
                     {
-                        p = new List<Product> { product };
+                        p = new ObservableCollection<Product>() { product };
                     }
 
                     await firebase
-                      .Child("Users")                      
+                      .Child("Users")
                       .Child(toUpdatePerson.Key)
-                      .Child("Cart")
-                      .PutAsync(new Users()
-                      {
-                          Firstname = toUpdatePerson.Object.Firstname,
-                          Lastname = toUpdatePerson.Object.Lastname,
-                          Email = toUpdatePerson.Object.Email,
-                          Phone = toUpdatePerson.Object.Phone,
-                          Cart = p,
-                          Wishlist = toUpdatePerson.Object.Wishlist,
+                      .PutAsync(
+                        new Users()
+                        {
+                            Firstname = toUpdatePerson.Object.Firstname,
+                            Lastname = toUpdatePerson.Object.Lastname,
+                            Email = toUpdatePerson.Object.Email,
+                            Phone = toUpdatePerson.Object.Phone,
+                            Cart = JsonConvert.SerializeObject(p),
+                            Wishlist = toUpdatePerson.Object.Wishlist,
 
-                      })
+                        });
 
-                      //.PutAsync(p);
+                    return true;
                 }
-                return true;
+                return false;
+
             }
             catch (Exception e)
             {
@@ -151,34 +154,39 @@ namespace RaneenProject.Data
                 .Child("Users")
                 .OnceAsync<Users>()).Where(a => a.Object.Email == email).FirstOrDefault();
 
-                if (toUpdatePerson != null)
+                ObservableCollection<Product> p;
+                if (toUpdatePerson.Object != null)
                 {
-                    List<Product> p;
-                    if (toUpdatePerson.Object.Wishlist != null)
+
+                    if (toUpdatePerson.Object.Wishlist != string.Empty)
                     {
-                        p = toUpdatePerson.Object.Wishlist;
+                        p = JsonConvert.DeserializeObject<ObservableCollection<Product>>(toUpdatePerson.Object.Cart);
                         p.Add(product);
+
                     }
                     else
                     {
-                        p = new List<Product> { product };
+                        p = new ObservableCollection<Product>() { product };
                     }
 
                     await firebase
                       .Child("Users")
                       .Child(toUpdatePerson.Key)
-                      .PutAsync(new Users()
-                      {
-                          Firstname = toUpdatePerson.Object.Firstname,
-                          Lastname = toUpdatePerson.Object.Lastname,
-                          Email = toUpdatePerson.Object.Email,
-                          Phone = toUpdatePerson.Object.Phone,
-                          Cart = toUpdatePerson.Object.Cart,
-                          Wishlist = p,
-                      });
+                      .PutAsync(
+                        new Users()
+                        {
+                            Firstname = toUpdatePerson.Object.Firstname,
+                            Lastname = toUpdatePerson.Object.Lastname,
+                            Email = toUpdatePerson.Object.Email,
+                            Phone = toUpdatePerson.Object.Phone,
+                            Cart = toUpdatePerson.Object.Cart,
+                            Wishlist = JsonConvert.SerializeObject(p),
 
+                        });
+
+                    return true;
                 }
-                return true;
+                return false;
             }
             catch (Exception e)
             {
