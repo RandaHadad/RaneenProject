@@ -33,7 +33,7 @@ namespace RaneenProject.ViewModels
 
         private Product product;
 
-        private double productRating;
+       /* private double productRating;
 
         private ObservableCollection<Category> categories;
 
@@ -53,22 +53,22 @@ namespace RaneenProject.ViewModels
 
         private double overallRating;
 
-        private double discountPrice;
+        private double discountPrice;*/
 
 
         private Command addFavouriteCommand;
 
         private Command addToCartCommand;
 
-        private Command shareCommand;
+        //private Command shareCommand;
 
-        private Command variantCommand;
+        //private Command variantCommand;
 
-        private Command itemSelectedCommand;
+        //private Command itemSelectedCommand;
 
-        private Command cardItemCommand;
+        //private Command cardItemCommand;
 
-        private Command loadMoreCommand;
+        //private Command loadMoreCommand;
 
         #endregion
 
@@ -111,13 +111,13 @@ namespace RaneenProject.ViewModels
         /// <summary>
         /// Gets or sets the value of detail page view model.
         /// </summary>
-         public static DetailPageViewModel BindingContext =>
-             detailPageViewModel = PopulateData<DetailPageViewModel>("detail.json");
+       /*  public static DetailPageViewModel BindingContext =>
+             detailPageViewModel = PopulateData<DetailPageViewModel>("detail.json");*/
 
         /// <summary>
         /// Gets or sets the property that has been bound with StackLayout, which displays the categories using ComboBox.
         /// </summary>
-         public ObservableCollection<Category> Categories
+        /* public ObservableCollection<Category> Categories
          {
              get
              {
@@ -133,12 +133,12 @@ namespace RaneenProject.ViewModels
 
                  this.SetProperty(ref this.categories, value);
              }
-         }
+         }*/
 
         /// <summary>
         /// Gets or sets the review of the customers .
         /// </summary>
-         [DataMember(Name = "detailPageReviews")]
+        /* [DataMember(Name = "detailPageReviews")]
          public ObservableCollection<Review> Reviews
          {
              get
@@ -153,11 +153,11 @@ namespace RaneenProject.ViewModels
                  this.NotifyPropertyChanged(nameof(this.Reviews));
              }
          }
-
+        */
         /// <summary>
         /// Gets or sets the property that has been bound with view, which displays the Favourite.
         /// </summary>
-        public bool IsFavourite
+       /* public bool IsFavourite
           {
               get
               {
@@ -168,12 +168,11 @@ namespace RaneenProject.ViewModels
               {
                   this.SetProperty(ref this.isFavourite, value);
               }
-          }
-        
+          }*/
         /// <summary>
         /// Gets or sets the property that has been bound with view, which displays the empty message.
         /// </summary>
-          public bool IsReviewVisible
+         /* public bool IsReviewVisible
           {
               get
               {
@@ -189,12 +188,12 @@ namespace RaneenProject.ViewModels
               {
                   this.SetProperty(ref this.isReviewVisible, value);
               }
-          }
+          }*/
 
         /// <summary>
         /// Gets or sets the property that has been bound with label, which displays the overall rating of the product.
         /// </summary>
-            public double OverallRating
+           /* public double OverallRating
             {
                 get
                 {
@@ -206,12 +205,12 @@ namespace RaneenProject.ViewModels
                     this.overallRating = value;
                     this.NotifyPropertyChanged();
                 }
-            }
+            }*/
             
         /// <summary>
         /// Gets or sets the property that has been bound with view, which displays the cart items count.
         /// </summary>
-           public int? CartItemCount
+         /*  public int? CartItemCount
            {
                get
                {
@@ -222,7 +221,7 @@ namespace RaneenProject.ViewModels
                {
                    this.SetProperty(ref this.cartItemCount, value);
                }
-           }
+           }*/
         
            /// <summary>
            /// Gets or sets the property that has been bound with a label, which displays the product name.
@@ -245,13 +244,13 @@ namespace RaneenProject.ViewModels
            /// <summary>
            /// Gets or sets the property that has been bound with SfCombobox, which displays the product variants.
            /// </summary>
-           [DataMember(Name = "sizevariants")]
+          /* [DataMember(Name = "sizevariants")]
            public List<string> SizeVariants { get; set; }
-
+          */
            /// <summary>
            /// Gets or sets the property that has been bound with a label, which displays the actual price of the product.
            /// </summary>
-           [DataMember(Name = "actualPrice")]
+          /* [DataMember(Name = "actualPrice")]
            public double ActualPrice
            {
                get
@@ -264,12 +263,12 @@ namespace RaneenProject.ViewModels
                    this.actualPrice = value;
                    this.NotifyPropertyChanged(nameof(this.ActualPrice));
                }
-           }
+           }*/
 
            /// <summary>
            /// Gets or sets the property that has been bound with a label, which displays the discounted percent of the product.
            /// </summary>
-           [DataMember(Name = "discountPercent")]
+        /*   [DataMember(Name = "discountPercent")]
            public double DiscountPercent
            {
                get
@@ -283,11 +282,11 @@ namespace RaneenProject.ViewModels
                    this.NotifyPropertyChanged(nameof(this.DiscountPercent));
                }
            }
-
+        */
            /// <summary>
            /// Gets or sets the property that has been bound with a label, which displays the discounted price of the product.
            /// </summary>
-           public double DiscountPrice
+        /*   public double DiscountPrice
            {
                get
                {
@@ -300,11 +299,11 @@ namespace RaneenProject.ViewModels
                    this.NotifyPropertyChanged(nameof(this.DiscountPrice));
                }
            }
-
+        */
            /// <summary>
            /// Gets or sets the property that has been bound with SfRotator, which displays the item images.
            /// </summary>
-           [DataMember(Name = "previewImages")]
+          /* [DataMember(Name = "previewImages")]
            public List<string> PreviewImages
            {
                get
@@ -321,7 +320,7 @@ namespace RaneenProject.ViewModels
                {
                    this.previewImages = value;
                }
-           }
+           }*/
 
         #endregion
 
@@ -414,7 +413,7 @@ namespace RaneenProject.ViewModels
         /// <typeparam name="T">Type of view model.</typeparam>
         /// <param name="fileName">Json file to fetch data.</param>
         /// <returns>Returns the view model object.</returns>
-      private static T PopulateData<T>(string fileName)
+     /* private static T PopulateData<T>(string fileName)
         {
             var file = "RaneenProject.Data." + fileName;
 
@@ -429,13 +428,13 @@ namespace RaneenProject.ViewModels
             }
 
             return data;
-        }
+        }*/
 
         /// <summary>
         /// Invoked when the Favourite button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void CalculateOverallRating()
+      /*  private void CalculateOverallRating()
         {
             if (this.Reviews == null || this.Reviews.Count == 0)
             {
@@ -453,7 +452,7 @@ namespace RaneenProject.ViewModels
             {
                 this.OverallRating = this.productRating / this.Reviews.Count;
             }
-        }
+        }*/
 
         /// <summary>
         /// Invoked when the Favourite button is clicked.
@@ -465,27 +464,27 @@ namespace RaneenProject.ViewModels
 
             if (savedfirebaseauth != null)
             {
-                DetailPageViewModel p = obj as DetailPageViewModel;
-                this.cartItemCount = this.cartItemCount ?? 0;
+                //DetailPageViewModel p = obj as DetailPageViewModel;
+                //this.cartItemCount = this.cartItemCount ?? 0;
 
                 dB = new UsersDB();
-                bool res = await dB.AddToWishlist(savedfirebaseauth.User.Email, p.Product);
-                if (res == true)
+                if (obj is Product model)
                 {
-                    if (obj is DetailPageViewModel model)
+                    bool res = await dB.AddToWishlist(savedfirebaseauth.User.Email, model);
+                    if (res == true)
                     {
                         model.IsFavourite = !model.IsFavourite;
                     }
                 }
 
-
             }
             else if (savedfirebaseauth == null)
             {
-                var targetpage = new LandingPage();
-                NavigationPage.SetHasBackButton(targetpage, false);
-                NavigationPage.SetHasNavigationBar(targetpage, true);
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
+                //var targetpage = new LandingPage();
+                //NavigationPage.SetHasBackButton(targetpage, false);
+                //NavigationPage.SetHasNavigationBar(targetpage, true);
+                //Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
+                await Shell.Current.GoToAsync(nameof(LandingPage));
 
             }
           
@@ -501,29 +500,32 @@ namespace RaneenProject.ViewModels
 
             if (savedfirebaseauth != null)
             {
-                DetailPageViewModel p = obj as DetailPageViewModel;
-                this.cartItemCount = this.cartItemCount ?? 0;
+                //DetailPageViewModel p = obj as DetailPageViewModel;
+                //this.cartItemCount = this.cartItemCount ?? 0;
 
                 await App.Current.MainPage.DisplayAlert("YourApp", savedfirebaseauth.User.Email , "Ok");
 
                 dB = new UsersDB();
-                bool res = await dB.AddToCart(savedfirebaseauth.User.Email, p.Product);
-                await App.Current.MainPage.DisplayAlert("YourApp", res.ToString(), "Ok");
-                if(res == true)
+                if(obj is Product model)
                 {
-                    this.cartItemCount = this.cartItemCount ?? 0;
-                    this.CartItemCount += 1;
+                    bool res = await dB.AddToCart(savedfirebaseauth.User.Email, model);
+                    await App.Current.MainPage.DisplayAlert("YourApp", res.ToString(), "Ok");
+                    if (res == true)
+                    {
+                        //this.cartItemCount = this.cartItemCount ?? 0;
+                        //this.CartItemCount += 1;
+                    }
                 }
                
 
             }
             else if(savedfirebaseauth == null)
             {
-                var targetpage = new LandingPage();
-                NavigationPage.SetHasBackButton(targetpage, false);
-                NavigationPage.SetHasNavigationBar(targetpage, true);
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
-
+                //var targetpage = new LandingPage();
+                //NavigationPage.SetHasBackButton(targetpage, false);
+                //NavigationPage.SetHasNavigationBar(targetpage, true);
+                //Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
+                await Shell.Current.GoToAsync(nameof(LandingPage));
             }
 
         }

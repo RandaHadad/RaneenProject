@@ -267,11 +267,11 @@ namespace RaneenProject.ViewModels
         /// <summary>
         /// Gets or sets the command will be executed when the cart icon button has been clicked.
         /// </summary>
-        public Command CardItemCommand
+        /*public Command CardItemCommand
         {
             get { return this.cardItemCommand ?? (this.cardItemCommand = new Command(this.CartClicked)); }
         }
-
+        */
         #endregion
 
         #region Methods
@@ -317,27 +317,30 @@ namespace RaneenProject.ViewModels
             var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
             if (savedfirebaseauth != null)
             {
-                Product p = obj as Product;
                 
-
                 dB = new UsersDB();
-                bool res = await dB.AddToWishlist(savedfirebaseauth.User.Email, p);
-                if (res == true)
+
+                if (obj is Product product)
                 {
-                    if (obj is Product product)
+                    bool res = await dB.AddToWishlist(savedfirebaseauth.User.Email, product);
+                    if (res)
                     {
                         product.IsFavourite = !product.IsFavourite;
                     }
                 }
 
 
+
+
+
             }
             else if (savedfirebaseauth == null)
             {
-                var targetpage = new LandingPage();
-                NavigationPage.SetHasBackButton(targetpage, false);
-                NavigationPage.SetHasNavigationBar(targetpage, true);
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
+                //var targetpage = new LandingPage();
+                //NavigationPage.SetHasBackButton(targetpage, false);
+                //NavigationPage.SetHasNavigationBar(targetpage, true);
+                //Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
+                await Shell.Current.GoToAsync(nameof(LandingPage));
 
             }
           
@@ -356,15 +359,20 @@ namespace RaneenProject.ViewModels
                 Product p = obj as Product;
           
                 dB = new UsersDB();
-                bool res = await dB.AddToCart(savedfirebaseauth.User.Email, p);
+                if(p is Product product)
+                {
+                    bool res = await dB.AddToCart(savedfirebaseauth.User.Email, p);
+
+                }
 
             }
             else if (savedfirebaseauth == null)
             {
-                var targetpage = new LandingPage();
+                /*var targetpage = new LandingPage();
                 NavigationPage.SetHasBackButton(targetpage, false);
                 NavigationPage.SetHasNavigationBar(targetpage, true);
-                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);*/
+                await Shell.Current.GoToAsync(nameof(LandingPage));
 
             }
         }
@@ -373,12 +381,12 @@ namespace RaneenProject.ViewModels
         /// Invoked when cart icon button is clicked.
         /// </summary>
         /// <param name="obj"></param>
-        private void CartClicked(object obj)
+       /* private void CartClicked(object obj)
         {
             var targetpage = new CartPage();
             NavigationPage.SetHasNavigationBar(targetpage, false);
             Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
-        }
+        }*/
 
         #endregion
     }
