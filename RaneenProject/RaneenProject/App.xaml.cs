@@ -21,7 +21,7 @@ namespace RaneenProject
             InitializeComponent();
 
             //MainPage = new CartPage();
-            MainPage = new NavigationPage(new BottomNavigationPage());
+            MainPage = new BottomNavigationPage();
 
         }
 

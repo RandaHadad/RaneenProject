@@ -1,4 +1,5 @@
 ﻿using RaneenProject.ViewModels;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.Serialization.Json;
 using Xamarin.Forms.Internals;
@@ -67,7 +68,6 @@ namespace RaneenProject.DataService
                 var serializer = new DataContractJsonSerializer(typeof(T));
                 data = (T)serializer.ReadObject(stream);
             }
-
             return data;
         }
 

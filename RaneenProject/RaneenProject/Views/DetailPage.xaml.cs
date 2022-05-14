@@ -14,6 +14,10 @@ namespace RaneenProject.Views
     public partial class DetailPage
     {
 
+        public DetailPage()
+        {
+            InitializeComponent();
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="DetailPage" /> class.
         /// </summary>
