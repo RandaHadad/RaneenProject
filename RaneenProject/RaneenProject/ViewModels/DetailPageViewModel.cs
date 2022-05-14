@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using RaneenProject.Data;
 using RaneenProject.Models;
+using RaneenProject.Views.UserAccountViews;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -8,6 +10,8 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -20,12 +24,15 @@ namespace RaneenProject.ViewModels
     [DataContract]
     public class DetailPageViewModel : BaseViewModel
     {
+        private UsersDB dB;
+
         #region Fields
 
         private static DetailPageViewModel detailPageViewModel;
+
         private Product product;
 
-       /* private double productRating;
+        private double productRating;
 
         private ObservableCollection<Category> categories;
 
@@ -45,23 +52,22 @@ namespace RaneenProject.ViewModels
 
         private double overallRating;
 
-        private double discountPrice;*/
-
+        private double discountPrice;
 
 
         private Command addFavouriteCommand;
 
         private Command addToCartCommand;
 
-        //private Command shareCommand;
+        private Command shareCommand;
 
-//        private Command variantCommand;
+        private Command variantCommand;
 
-  //      private Command itemSelectedCommand;
+        private Command itemSelectedCommand;
 
-    //    private Command cardItemCommand;
+        private Command cardItemCommand;
 
-      //  private Command loadMoreCommand;
+        private Command loadMoreCommand;
 
         #endregion
 
@@ -70,7 +76,7 @@ namespace RaneenProject.ViewModels
         /// <summary>
         /// Initializes a new instance for the <see cref="DetailPageViewModel" /> class.
         /// </summary>
-         public DetailPageViewModel(Product _product)
+        public DetailPageViewModel(Product _product)
         {
             product = _product;
             RecommendedProducts = PopulateData("ecommerce.json");
@@ -92,25 +98,25 @@ namespace RaneenProject.ViewModels
             set;
         }
 
-        public Product Product 
+        public Product Product
         {
-            get 
+            get
             {
                 return product;
-            } 
+            }
         }
 
 
         /// <summary>
         /// Gets or sets the value of detail page view model.
         /// </summary>
-        /* public static DetailPageViewModel BindingContext =>
-             detailPageViewModel = PopulateData<DetailPageViewModel>("detail.json");*/
+         public static DetailPageViewModel BindingContext =>
+             detailPageViewModel = PopulateData<DetailPageViewModel>("detail.json");
 
         /// <summary>
         /// Gets or sets the property that has been bound with StackLayout, which displays the categories using ComboBox.
         /// </summary>
-        /* public ObservableCollection<Category> Categories
+         public ObservableCollection<Category> Categories
          {
              get
              {
@@ -126,12 +132,12 @@ namespace RaneenProject.ViewModels
 
                  this.SetProperty(ref this.categories, value);
              }
-         }*/
+         }
 
         /// <summary>
         /// Gets or sets the review of the customers .
         /// </summary>
-        /* [DataMember(Name = "detailPageReviews")]
+         [DataMember(Name = "detailPageReviews")]
          public ObservableCollection<Review> Reviews
          {
              get
@@ -145,12 +151,12 @@ namespace RaneenProject.ViewModels
                  this.CalculateOverallRating();
                  this.NotifyPropertyChanged(nameof(this.Reviews));
              }
-         }*/
+         }
 
         /// <summary>
         /// Gets or sets the property that has been bound with view, which displays the Favourite.
         /// </summary>
-        /*  public bool IsFavourite
+        public bool IsFavourite
           {
               get
               {
@@ -162,11 +168,11 @@ namespace RaneenProject.ViewModels
                   this.SetProperty(ref this.isFavourite, value);
               }
           }
-        */
+        
         /// <summary>
         /// Gets or sets the property that has been bound with view, which displays the empty message.
         /// </summary>
-        /*  public bool IsReviewVisible
+          public bool IsReviewVisible
           {
               get
               {
@@ -183,11 +189,11 @@ namespace RaneenProject.ViewModels
                   this.SetProperty(ref this.isReviewVisible, value);
               }
           }
-        */
+
         /// <summary>
         /// Gets or sets the property that has been bound with label, which displays the overall rating of the product.
         /// </summary>
-        /*    public double OverallRating
+            public double OverallRating
             {
                 get
                 {
@@ -200,11 +206,11 @@ namespace RaneenProject.ViewModels
                     this.NotifyPropertyChanged();
                 }
             }
-            */
+            
         /// <summary>
         /// Gets or sets the property that has been bound with view, which displays the cart items count.
         /// </summary>
-        /*   public int? CartItemCount
+           public int? CartItemCount
            {
                get
                {
@@ -215,8 +221,8 @@ namespace RaneenProject.ViewModels
                {
                    this.SetProperty(ref this.cartItemCount, value);
                }
-           }*/
-        /*
+           }
+        
            /// <summary>
            /// Gets or sets the property that has been bound with a label, which displays the product name.
            /// </summary>
@@ -314,7 +320,7 @@ namespace RaneenProject.ViewModels
                {
                    this.previewImages = value;
                }
-           }*/
+           }
 
         #endregion
 
@@ -338,7 +344,7 @@ namespace RaneenProject.ViewModels
         {
             get
             {
-                return this.addToCartCommand ?? (this.addToCartCommand = new Command(this.AddToCartClicked));
+                return this.addToCartCommand ?? (this.addToCartCommand = new Command(this.AddToCartClickedAsync));
             }
         }
 
@@ -407,7 +413,7 @@ namespace RaneenProject.ViewModels
         /// <typeparam name="T">Type of view model.</typeparam>
         /// <param name="fileName">Json file to fetch data.</param>
         /// <returns>Returns the view model object.</returns>
-       /* private static T PopulateData<T>(string fileName)
+      private static T PopulateData<T>(string fileName)
         {
             var file = "RaneenProject.Data." + fileName;
 
@@ -422,13 +428,13 @@ namespace RaneenProject.ViewModels
             }
 
             return data;
-        }*/
+        }
 
         /// <summary>
         /// Invoked when the Favourite button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-      /*  private void CalculateOverallRating()
+        private void CalculateOverallRating()
         {
             if (this.Reviews == null || this.Reviews.Count == 0)
             {
@@ -446,7 +452,7 @@ namespace RaneenProject.ViewModels
             {
                 this.OverallRating = this.productRating / this.Reviews.Count;
             }
-        }*/
+        }
 
         /// <summary>
         /// Invoked when the Favourite button is clicked.
@@ -464,55 +470,84 @@ namespace RaneenProject.ViewModels
         /// Invoked when the Cart button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void AddToCartClicked(object obj)
+        private async void AddToCartClickedAsync(object obj)
         {
-            // do something
+           var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+
+            if (savedfirebaseauth != null)
+            {
+                DetailPageViewModel p = obj as DetailPageViewModel;
+                this.cartItemCount = this.cartItemCount ?? 0;
+
+                await App.Current.MainPage.DisplayAlert("YourApp", savedfirebaseauth.User.Email , "Ok");
+
+                dB = new UsersDB();
+                bool res = await dB.AddToCart(savedfirebaseauth.User.Email, p.Product);
+                await App.Current.MainPage.DisplayAlert("YourApp", res.ToString(), "Ok");
+                if(res == true)
+                {
+                    this.cartItemCount = this.cartItemCount ?? 0;
+                    this.CartItemCount += 1;
+                }
+               
+
+            }
+            else if(savedfirebaseauth == null)
+            {
+                var targetpage = new LandingPage();
+                NavigationPage.SetHasBackButton(targetpage, false);
+                NavigationPage.SetHasNavigationBar(targetpage, true);
+                Xamarin.Forms.Application.Current.MainPage.Navigation.PushAsync(targetpage);
+
+            }
+
         }
+     
 
         /// <summary>
         /// Invoked when the Share button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-       /* private void ShareClicked(object obj)
+        private void ShareClicked(object obj)
         {
             // Do something.
-        }*/
+        }
 
         /// <summary>
         /// Invoked when the variant button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-      /*  private void VariantClicked(object obj)
+        private void VariantClicked(object obj)
         {
             // Do something
-        }*/
+        }
 
         /// <summary>
         /// Invoked when an item is selected.
         /// </summary>
         /// <param name="attachedObject">The Object</param>
-       /* private void ItemSelected(object attachedObject)
+        private void ItemSelected(object attachedObject)
         {
             // Do something
-        }*/
+        }
 
         /// <summary>
         /// Invoked when cart icon button is clicked.
         /// </summary>
         /// <param name="obj">The Object.</param>
-      /*  private void CartClicked(object obj)
+       private void CartClicked(object obj)
         {
             // Do something
-        }*/
+        }
 
         /// <summary>
         /// Invoked when Load more button is clicked.
         /// </summary>
         /// <param name="obj">The Object</param>
-      /*  private void LoadMoreClicked(object obj)
+      private void LoadMoreClicked(object obj)
         {
             // Do something
-        }*/
+        }
 
         /// <summary>
         /// Populates the data for view model from json file.

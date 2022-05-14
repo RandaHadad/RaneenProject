@@ -1,7 +1,12 @@
 ﻿using Firebase.Auth;
 using Newtonsoft.Json;
+using RaneenProject.Data;
+using RaneenProject.Models;
 using RaneenProject.Views.ProfilePageViews;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -13,6 +18,7 @@ namespace RaneenProject.Views.UserAccountViews
     public partial class SignupPage : ContentPage
     {
         public string WebAPIkey = "AIzaSyDsFm9Tuv4Brz9WJM4Q-qVLzd5wtLpie80";
+        UsersDB firebaseHelper = new UsersDB(); 
 
         // Launcher.OpenAsync is provided by Xamarin.Essentials.
         public ICommand TapCommand => new Command(loginPage);
@@ -33,19 +39,58 @@ namespace RaneenProject.Views.UserAccountViews
 
         async void signupbutton_Clicked(System.Object sender, System.EventArgs e)
         {
-            try
+            errormssg.IsVisible = false;
+
+            if (UserNewFirstName.Text == "" || UserNewFirstName.Text == null || UserNewLastName.Text == "" || UserNewLastName.Text == null || UserNewPhone.Text == "" || UserNewPhone.Text == null)
             {
+                errormssg.Text = "All Data Fields are Required";
+                errormssg.IsVisible = true;
+                return;
+            }
+
+            try
+            {               
                 var authProvider = new FirebaseAuthProvider(new FirebaseConfig(WebAPIkey));
-                //await DisplayAlert($"{UserNewEmail.Text}, {UserNewPassword.Text}", "ok","cancel");
                 var auth = await authProvider.CreateUserWithEmailAndPasswordAsync(UserNewEmail.Text, UserNewPassword.Text);
-                string gettoken = auth.FirebaseToken;
-                await App.Current.MainPage.DisplayAlert("Alert", gettoken, "Ok");
+               
+                //Adding user info to Realtime Database
+                Users nuser = new Users()
+                {
+                    Firstname = UserNewFirstName.Text,
+                    Lastname = UserNewLastName.Text,
+                    Email = UserNewEmail.Text,
+                    Phone = UserNewPhone.Text,
+                    Cart = new List<Product>() { new Product()},
+                    Wishlist = new List<Product>() { new Product() },
+                };
+
+               bool res = await firebaseHelper.AddUser(nuser);
+                if (res)
+                {
+                    //string gettoken = auth.FirebaseToken;
+                    //await App.Current.MainPage.DisplayAlert("Alert", gettoken, "Ok");
+
+                    var targetpage = new LoginPage();
+                    NavigationPage.SetHasNavigationBar(targetpage, false);
+                    await Navigation.PushAsync(targetpage);
+                }
+                //TODO: Temp lines
+                var targetpageTemp = new LoginPage();
+                NavigationPage.SetHasNavigationBar(targetpageTemp, false);
+                await Navigation.PushAsync(targetpageTemp);
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
-            }
+                //await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
 
+                errormssg.Text = ex.Message.Split(' ').Last();
+                errormssg.IsVisible = true;
+            }
+        }
+
+        private void backButton(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
         }
 
         //async void loginbutton_Clicked(System.Object sender, System.EventArgs e)

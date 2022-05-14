@@ -13,7 +13,6 @@
     BackgroundColor="{DynamicResource Gray-Bg}"
     NavigationPage.HasNavigationBar="False">
 
-    <!--TODO: Upload our team Images-->
     <ContentPage.ControlTemplate>
         <ControlTemplate>
             <StackLayout Spacing="0">

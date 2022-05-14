@@ -5,6 +5,25 @@
              Title="Sign up"
              BackgroundColor="#F0F3F8">
 
+    <ContentPage.ControlTemplate>
+        <ControlTemplate>
+            <StackLayout Spacing="0">
+                <!--  Title View  -->
+                <control:TitleView Title="Signup">
+                    <!--  Back button command  -->
+                    <control:TitleView.LeadingView>
+                        <buttons:SfButton
+                            x:Name="backButton"      
+                            Clicked="backButton"
+                            Style="{StaticResource IconButtonStyle}"
+                            Text="{StaticResource Back}" />
+                    </control:TitleView.LeadingView>
+                </control:TitleView>
+                <ContentPresenter />
+            </StackLayout>
+        </ControlTemplate>
+    </ContentPage.ControlTemplate>
+
     <ContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="#F0F3F8" Margin="0,0,0,40">
@@ -23,43 +42,50 @@
                        TextColor="Black"
                        Padding="30, 20, 0, 0"/>
                 <Frame CornerRadius="5"
-                   Padding="0"
-                   Margin="30, 0, 30, 0">
+                       Padding="0"
+                       Margin="30, 0, 30, 0">
                     <Entry BackgroundColor="white"
-                   TextColor="Black"
-                   FontSize="14"/>
+                           TextColor="Black"
+                           x:Name="UserNewFirstName"
+                           FontSize="14"/>
                 </Frame>
+
                 <Label Text="Last Name"
                        TextColor="Black"
                        Padding="30, 20, 0, 0"/>
                 <Frame CornerRadius="5"
-                   Padding="0"
-                   Margin="30, 0, 30, 0">
+                       Padding="0"
+                       Margin="30, 0, 30, 0">
                     <Entry BackgroundColor="white"
-                   TextColor="Black"
-                   FontSize="14"/>
+                           TextColor="Black"
+                           x:Name="UserNewLastName"
+                           FontSize="14"/>
                 </Frame>
+
                 <Label Text="Email"
                        TextColor="Black"
                        Padding="30, 20, 0, 0"/>
                 <Frame CornerRadius="5"
-                   Padding="0"
-                   Margin="30, 0, 30, 0">
+                       Padding="0"
+                       Margin="30, 0, 30, 0">
                     <Entry BackgroundColor="White"
                            x:Name="UserNewEmail"
                            TextColor="Black"
-                   FontSize="14"/>
+                           FontSize="14"/>
                 </Frame>
+
                 <Label Text="Phone"
                        TextColor="Black"
                        Padding="30, 20, 0, 0"/>
                 <Frame CornerRadius="5"
-                   Padding="0"
-                   Margin="30, 0, 30, 0">
+                       Padding="0"
+                       Margin="30, 0, 30, 0">
                     <Entry BackgroundColor="white"
-                   TextColor="Black"
-                   FontSize="14"/>
+                           TextColor="Black"
+                           x:Name="UserNewPhone"
+                           FontSize="14"/>
                 </Frame>
+
                 <Label Text="Password"
                        TextColor="Black"
                        Padding="30, 20, 0, 0"/>
@@ -69,9 +95,15 @@
                    Margin="30, 0, 30, 0">
                     <Entry BackgroundColor="white"
                            x:Name="UserNewPassword"
-                   TextColor="Black"
-                   FontSize="14"/>
+                           TextColor="Black"
+                           FontSize="14"/>
                 </Frame>
+
+                <Label Text=""
+                   x:Name="errormssg"
+                   Padding="30,10,0,0"
+                   TextColor="red"
+                   IsVisible="false"/>
 
                 <Button Text="Sign up"
                         Clicked="signupbutton_Clicked"
