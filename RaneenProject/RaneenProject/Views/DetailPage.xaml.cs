@@ -36,14 +36,14 @@ namespace RaneenProject.Views
         {
             base.OnSizeAllocated(width, height);
 
-            if (width > height)
+           /* if (width > height)
             {
                 this.Rotator.ItemTemplate = (DataTemplate)this.Resources["LandscapeTemplate"];
             }
             else
             {
                 this.Rotator.ItemTemplate = (DataTemplate)this.Resources["PortraitTemplate"];
-            }
+            }*/
         }
     }
 }
