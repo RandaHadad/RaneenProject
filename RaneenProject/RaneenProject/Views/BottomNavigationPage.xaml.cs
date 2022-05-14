@@ -22,12 +22,6 @@ namespace RaneenProject.Views
             tabbedPage.Children.Add(new NavigationPage(new SignupPage()));
             tabbedPage.Children.Add(new NavigationPage(new AboutUsWithScrollPage()));
             tabbedPage.Children.Add(new NavigationPage(new CatalogTilePage()));*/
-
-
         }
-
-
-
-
     }
 }
