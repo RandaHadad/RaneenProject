@@ -37,6 +37,18 @@ namespace RaneenProject.Views.UserAccountViews
             BindingContext = this;
         }
 
+        protected override async void OnAppearing()
+        {
+            var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+            if (savedfirebaseauth != null)
+            {
+                //var targetpage = new ProfilePage();
+                //NavigationPage.SetHasNavigationBar(targetpage, false);
+                //Navigation.PushAsync(targetpage);
+                Navigation.PopAsync();
+            }
+        }
+
         async void signupbutton_Clicked(System.Object sender, System.EventArgs e)
         {
             errormssg.IsVisible = false;
