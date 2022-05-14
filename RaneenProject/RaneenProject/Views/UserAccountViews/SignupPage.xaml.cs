@@ -41,12 +41,12 @@ namespace RaneenProject.Views.UserAccountViews
         {
             errormssg.IsVisible = false;
 
-            //bool isEmpty = false;
-            //if (UserNewFirstName.Text == "" || UserNewFirstName == null || UserNewLastName.Text == "" || UserNewLastName == null || UserNewPhone.Text == "" || UserNewPhone == null)
-            //{
-            //    isEmpty = true;
-            //    return;
-            //}
+            if (UserNewFirstName.Text == "" || UserNewFirstName.Text == null || UserNewLastName.Text == "" || UserNewLastName.Text == null || UserNewPhone.Text == "" || UserNewPhone.Text == null)
+            {
+                errormssg.Text = "All Data Fields are Required";
+                errormssg.IsVisible = true;
+                return;
+            }
 
             try
             {               
@@ -82,11 +82,8 @@ namespace RaneenProject.Views.UserAccountViews
             catch (Exception ex)
             {
                 //await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
-                
-                //if(isEmpty)
-                //    errormssg.Text = "All Data Fields are Required";
-                //else
-                    errormssg.Text = ex.Message.Split(' ').Last();
+
+                errormssg.Text = ex.Message.Split(' ').Last();
                 errormssg.IsVisible = true;
             }
         }
