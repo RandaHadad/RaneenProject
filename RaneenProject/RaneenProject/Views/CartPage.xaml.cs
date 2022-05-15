@@ -29,12 +29,27 @@ namespace RaneenProject.Views
         {
             UsersDB dB = new UsersDB();
             Firebase.Auth.FirebaseAuth savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
-            Users logedin = await dB.GetUser(savedfirebaseauth.User.Email);
-            this.BindingContext = new CartPageViewModel()
+
+            if (savedfirebaseauth != null)
             {
-                CartDetails = JsonConvert.DeserializeObject<ObservableCollection<Product>>(logedin.Cart)
-                
-            };
+                Users logedin = await dB.GetUser(savedfirebaseauth.User.Email);
+                this.BindingContext = new CartPageViewModel()
+                {
+                    CartDetails = JsonConvert.DeserializeObject<ObservableCollection<Product>>(logedin.Cart)
+
+                };
+
+
+            }
+            else
+            {
+                this.BindingContext = new CartPageViewModel()
+                {
+                    CartDetails = new ObservableCollection<Product>() 
+
+                };
+            }
+
 
         }
     }

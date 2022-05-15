@@ -28,10 +28,10 @@ namespace RaneenProject.Views.UserAccountViews
             var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
             if (savedfirebaseauth != null)
             {
-                //var targetpage = new ProfilePage();
-                //NavigationPage.SetHasNavigationBar(targetpage, false);
-                //Navigation.PushAsync(targetpage);
-                Navigation.PopAsync();
+                var targetpage = new ProfilePage();
+                NavigationPage.SetHasNavigationBar(targetpage, false);
+                Navigation.PushAsync(targetpage);
+                //Navigation.PopAsync();
             }
         }
 
