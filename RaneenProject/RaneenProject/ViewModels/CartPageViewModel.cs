@@ -64,6 +64,7 @@ namespace RaneenProject.ViewModels
                 }
 
                 this.SetProperty(ref this.cartDetails, value);
+                this.UpdatePrice();
             }
         }
 
