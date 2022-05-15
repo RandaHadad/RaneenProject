@@ -1,6 +1,9 @@
+using Newtonsoft.Json;
+using RaneenProject.Data;
 using RaneenProject.Models;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -53,7 +56,7 @@ namespace RaneenProject.ViewModels
                 return this.cartDetails;
             }
 
-            private set
+             set
             {
                 if (this.cartDetails == value)
                 {
@@ -223,12 +226,19 @@ namespace RaneenProject.ViewModels
         /// Invoked when an item is selected.
         /// </summary>
         /// <param name="obj">The Object</param>
-        private void RemoveClicked(object obj)
+        private async void RemoveClicked(object obj)
         {
             if (obj is Product product)
             {
-                this.CartDetails.Remove(product);
-                this.UpdatePrice();
+                var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+                UsersDB dB = new UsersDB();
+                bool res =await dB.DeleteProduct(savedfirebaseauth.User.Email, product);
+                if(res == true)
+                {
+                    this.CartDetails.Remove(product);
+                    this.UpdatePrice();
+                }
+      
             }
         }
 

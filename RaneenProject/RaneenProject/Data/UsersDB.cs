@@ -92,7 +92,7 @@ namespace RaneenProject.Data
 
 
         }
-        
+
         public async Task<bool> AddToCart(string email, Product product)
         {
             try
@@ -105,6 +105,9 @@ namespace RaneenProject.Data
 
                 if (toUpdatePerson.Object != null)
                 {
+                    //string[] words = product.PreviewImage.Split('/');
+                    //product.PreviewImage = words.Last();
+                    //await App.Current.MainPage.DisplayAlert("new", product.PreviewImage + words.Last()  , "Ok");
 
                     if (toUpdatePerson.Object.Cart != string.Empty)
                     {
@@ -202,6 +205,44 @@ namespace RaneenProject.Data
           .Child("Users")
           .OnceAsync<Users>()).Where(a => a.Object.Email == email).FirstOrDefault();
                 await firebase.Child("Users").Child(toDeletePerson.Key).DeleteAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine($"Error:{e}");
+                return false;
+            }
+
+
+        }
+        public async Task<bool> DeleteProduct(string email, Product product)
+        {
+            try
+            {
+                var toDeleteProduct = (await firebase
+                .Child("Users")
+                .OnceAsync<Users>()).Where(a => a.Object.Email == email).FirstOrDefault();
+
+                List<Product> allproducts = JsonConvert.DeserializeObject<List<Product>>(toDeleteProduct.Object.Cart);
+
+                Product itemToRemove = allproducts.SingleOrDefault(r => r.Id == product.Id);
+                if (itemToRemove != null)
+                    allproducts.Remove(itemToRemove);
+
+                await firebase
+                      .Child("Users")
+                      .Child(toDeleteProduct.Key)
+                      .PutAsync(
+                        new Users()
+                        {
+                            Firstname = toDeleteProduct.Object.Firstname,
+                            Lastname = toDeleteProduct.Object.Lastname,
+                            Email = toDeleteProduct.Object.Email,
+                            Phone = toDeleteProduct.Object.Phone,
+                            Cart = JsonConvert.SerializeObject(allproducts),
+                            Wishlist = toDeleteProduct.Object.Wishlist,
+
+                        });
                 return true;
             }
             catch (Exception e)

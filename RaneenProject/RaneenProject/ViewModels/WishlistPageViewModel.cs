@@ -63,7 +63,7 @@ namespace RaneenProject.ViewModels
                 return this.wishlistDetails;
             }
 
-            private set
+             set
             {
                 if (this.wishlistDetails == value)
                 {
@@ -300,17 +300,17 @@ namespace RaneenProject.ViewModels
             }
         }
 
-        /// <summary>
-        /// Invoked when the quantity is selected.
-        /// </summary>
-        /// <param name="selectedItem">The Object</param>
+        ///// <summary>
+        ///// Invoked when the quantity is selected.
+        ///// </summary>
+        ///// <param name="selectedItem">The Object</param>
         private void QuantitySelected(object selectedItem)
         {
         }
 
-        /// <summary>
-        /// Invoked when item is clicked.
-        /// </summary>
+        ///// <summary>
+        ///// Invoked when item is clicked.
+        ///// </summary>
         private void ItemSelected(object obj)
         {
             // Do something

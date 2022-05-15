@@ -1,4 +1,10 @@
-﻿using RaneenProject.DataService;
+﻿using Newtonsoft.Json;
+using RaneenProject.Data;
+using RaneenProject.DataService;
+using RaneenProject.Models;
+using RaneenProject.ViewModels;
+using System.Collections.ObjectModel;
+using Xamarin.Essentials;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
@@ -17,7 +23,19 @@ namespace RaneenProject.Views
         public CartPage()
         {
             this.InitializeComponent();
-            this.BindingContext = CartDataService.Instance.CartPageViewModel;
+            getList();
+        }
+        public async void getList()
+        {
+            UsersDB dB = new UsersDB();
+            Firebase.Auth.FirebaseAuth savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+            Users logedin = await dB.GetUser(savedfirebaseauth.User.Email);
+            this.BindingContext = new CartPageViewModel()
+            {
+                CartDetails = JsonConvert.DeserializeObject<ObservableCollection<Product>>(logedin.Cart)
+                
+            };
+
         }
     }
 }
