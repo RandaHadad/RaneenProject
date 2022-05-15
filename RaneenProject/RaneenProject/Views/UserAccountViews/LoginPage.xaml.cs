@@ -6,6 +6,7 @@ using RaneenProject.Views.ProfilePageViews;
 using Firebase.Auth;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
+using System.Linq;
 
 namespace RaneenProject.Views.UserAccountViews
 {
@@ -31,6 +32,18 @@ namespace RaneenProject.Views.UserAccountViews
             BindingContext = this;
         }
 
+        protected override async void OnAppearing()
+        {
+            var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+            if (savedfirebaseauth != null)
+            {
+                //var targetpage = new ProfilePage();
+                //NavigationPage.SetHasNavigationBar(targetpage, false);
+                //Navigation.PushAsync(targetpage);
+                Navigation.PopAsync();
+            }
+        }
+
         async void loginbutton_Clicked(System.Object sender, System.EventArgs e)
         {
             errormssg.IsVisible = false;
@@ -45,14 +58,19 @@ namespace RaneenProject.Views.UserAccountViews
 
                 var targetpage = new ProfilePage();
                 NavigationPage.SetHasNavigationBar(targetpage, false);
+
+                //var existingPages = Navigation.NavigationStack.ToList();
+                //foreach (var page in existingPages)
+                //{
+                //    Navigation.RemovePage(page);
+                //}
                 await Navigation.PushAsync(targetpage);
             }
             catch (Exception ex)
             {
                 errormssg.IsVisible = true;
-                //await App.Current.MainPage.DisplayAlert("Alert", "Invalid useremail or password", "OK");
+                //await App.Current.MainPage.DisplayAlert("Alert", ex.Message, "OK");
             }
-
         }
 
         private void backButton(object sender, EventArgs e)

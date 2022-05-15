@@ -20,10 +20,6 @@ namespace RaneenProject.Views.ProfilePageViews
         public ICommand TapCommandAboutus => new Command(AboutUsPage);
         public ICommand TapCommandLandingPage => new Command(Logout_Clicked);
 
-        String fname;
-        String lname;
-        String email;
-
         private void AccountInformationPage(object obj)
         {           
             var targetpage = new AccountInformationPage();
@@ -62,10 +58,8 @@ namespace RaneenProject.Views.ProfilePageViews
                 //Here we are Refreshing the token
                 var RefreshedContent = await authProvider.RefreshAuthAsync(savedfirebaseauth);
                 Preferences.Set("MyFirebaseRefreshToken", JsonConvert.SerializeObject(RefreshedContent));
+
                 //Now lets grab user information
-                fname = savedfirebaseauth.User.FirstName;
-                lname = savedfirebaseauth.User.LastName;
-                email = savedfirebaseauth.User.Email;
                 MyUserEmail.Text = savedfirebaseauth.User.Email;
                 MyUserName.Text = $"{savedfirebaseauth.User.FirstName} {savedfirebaseauth.User.LastName}";
             }
@@ -79,7 +73,7 @@ namespace RaneenProject.Views.ProfilePageViews
         void Logout_Clicked(object obj)
         {
             Preferences.Remove("MyFirebaseRefreshToken");
-            //TODO: confirm mssg
+
             var targetpage = new LandingPage();
             NavigationPage.SetHasNavigationBar(targetpage, false);
             Navigation.PushAsync(targetpage);

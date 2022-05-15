@@ -11,23 +11,11 @@ namespace RaneenProject.Views
     public partial class BottomNavigationPage : Shell
     {
 
-       // TabbedPage tabbedPage = new TabbedPage();
         public BottomNavigationPage()
         {
             this.InitializeComponent();
-/*
-            tabbedPage.Children.Add(new NavigationPage(new DetailPage()));
-            tabbedPage.Children.Add(new NavigationPage(new ProfilePage()));
-            tabbedPage.Children.Add(new NavigationPage(new LoginPage()));
-            tabbedPage.Children.Add(new NavigationPage(new SignupPage()));
-            tabbedPage.Children.Add(new NavigationPage(new AboutUsWithScrollPage()));
-            tabbedPage.Children.Add(new NavigationPage(new CatalogTilePage()));*/
 
-
+            Routing.RegisterRoute(nameof(LandingPage),typeof(LandingPage));
         }
-
-
-
-
     }
 }

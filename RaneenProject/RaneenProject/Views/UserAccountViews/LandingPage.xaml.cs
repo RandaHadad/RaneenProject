@@ -13,6 +13,7 @@ namespace RaneenProject.Views.UserAccountViews
         public LandingPage()
         {
             InitializeComponent();
+
             var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
             if (savedfirebaseauth != null)
             {
@@ -21,7 +22,19 @@ namespace RaneenProject.Views.UserAccountViews
                 Navigation.PushAsync(targetpage);
             }
         }
-    
+
+        protected override async void OnAppearing()
+        {
+            var savedfirebaseauth = JsonConvert.DeserializeObject<Firebase.Auth.FirebaseAuth>(Preferences.Get("MyFirebaseRefreshToken", ""));
+            if (savedfirebaseauth != null)
+            {
+                //var targetpage = new ProfilePage();
+                //NavigationPage.SetHasNavigationBar(targetpage, false);
+                //Navigation.PushAsync(targetpage);
+                Navigation.PopAsync();
+            }
+        }
+
         private void signinPage(object sender, EventArgs e)
         {
             var targetpage = new LoginPage();

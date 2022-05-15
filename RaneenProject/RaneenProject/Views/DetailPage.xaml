@@ -165,7 +165,7 @@
                             </Grid.ColumnDefinitions>
 
                             <!--  Product images  -->
-                            <rotator:SfRotator
+                           <!-- <rotator:SfRotator
                                 x:Name="Rotator"
                                 BackgroundColor="{OnIdiom Default={DynamicResource Gray-Bg},
                                                           Tablet={DynamicResource Gray-100},
@@ -174,9 +174,33 @@
                                 EnableLooping="False"
                                 HorizontalOptions="Center"
                                 ItemTemplate="{StaticResource PortraitTemplate}"
-                                ItemsSource="{Binding Product.PreviewImages}"
+                                ItemsSource="{Binding Product.PreviewImage}"
                                 NavigationStripMode="Thumbnail"
-                                VerticalOptions="Start" />
+                                VerticalOptions="Start" /> -->
+
+                            <Image
+                                Aspect="AspectFit"
+                                BackgroundColor="{DynamicResource Transparent}"
+                                HeightRequest="140"
+            
+                                HorizontalOptions="{core:OnPlatformOrientationLayoutOptions AndroidPhonePortrait=FillAndExpand,
+                                                                                            AndroidPhoneLandscape=StartAndExpand,
+                                                                                            iOSPhonePortrait=FillAndExpand,
+                                                                                            iOSPhoneLandscape=StartAndExpand,
+                                                                                            AndroidTabletPortrait=FillAndExpand,
+                                                                                            AndroidTabletLandscape=StartAndExpand,
+                                                                                            iOSTabletPortrait=FillAndExpand,
+                                                                                            iOSTabletLandscape=StartAndExpand}"
+                                WidthRequest="{OnIdiom Phone=183,
+                                                       Tablet=224,
+                                                       Desktop=224}">
+                                                <Image.Source>
+                                                    <UriImageSource
+                                        CacheValidity="14"
+                                        CachingEnabled="true"
+                                        Uri="{Binding Product.PreviewImage}" />
+                                                </Image.Source>     
+                            </Image>
 
                             <ContentView
                             Grid.Row="{OnIdiom Default=1,

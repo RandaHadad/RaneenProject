@@ -19,22 +19,7 @@
 
             <!--  Title View  -->
             <controls:TitleView Title="Categories" Grid.Row="0">
-                <controls:TitleView.LeadingView>
-                    <buttons:SfButton
-                        x:Name="backButton"
-                        Command="{Binding BindingContext.BackButtonCommand, Source={x:Reference CategoryTile}}"
-                        CommandParameter="{x:Reference backButton}"
-                        Style="{StaticResource IconButtonStyle}"
-                        Text="{StaticResource Back}" />
-                </controls:TitleView.LeadingView>
-                <controls:TitleView.TrailingView>
-                    <StackLayout HorizontalOptions="End" Orientation="Horizontal">
-                        <buttons:SfButton
-                            Command="{Binding BindingContext.NotificationCommand, Source={x:Reference CategoryTile}}"
-                            Style="{StaticResource IconButtonStyle}"
-                            Text="{StaticResource Notification}" />
-                    </StackLayout>
-                </controls:TitleView.TrailingView>
+                
             </controls:TitleView>
 
             <!--  ListView for Category  -->

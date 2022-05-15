@@ -108,7 +108,7 @@
             Padding="0,12,0,12"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="CenterAndExpand"
-            Command="{Binding ParentBindingContext.AddFavouriteCommand, Source={x:Reference productTileTemplate}}"
+            Command="{Binding ParentBindingContext.AddToCartCommand, Source={x:Reference productTileTemplate}}"
             CommandParameter="{Binding}"
             FontSize="15"
             Style="{StaticResource SimpleButtonStyle}"
